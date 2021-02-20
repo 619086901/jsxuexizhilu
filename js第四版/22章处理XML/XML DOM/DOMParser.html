@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   let hasXmlDom = document.implementation.hasFeature('XML', '2.0');
+
+   let parser = new DOMParser(); //解析为DOM文档
+   let xmldom = parser.parseFromString('<root><child/></root>', 'text/xml');
+
+   console.log(xmldom.documentElement.tagName);
+   console.log(xmldom.documentElement.firstChild.tagName);
+   let anotherChild = xmldom.createElement('child');
+   xmldom.documentElement.appendChild(anotherChild);
+
+   let children = xmldom.getElementsByTagName('child');
+   console.log(children.length);
+
+   let serializer = new XMLSerializer(); //DOM文档序列化成字符串(相反)
+   let xml = serializer.serializeToString(xmldom); //
+   console.log(xml);
+  </script>
+ </body>
+</html>

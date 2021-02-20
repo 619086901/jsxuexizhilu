@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="跨游览器的事件对象.js"></script>
+ </head>
+ <body>
+  <div id="myDiv">Right click or</div>
+  <ul
+   id="myMenu"
+   style="position: absolute; visibility: hidden; background-color: silver"
+  >
+   <li><a href="http://www.baidu.com">www.baidu.com</a></li>
+   <li>
+    <a
+     href="https://www.bilibili.com/anime/index/#season_version=-1&area=-1&is_finish=-1&copyright=-1&season_status=-1&season_month=10&year=%5B2020%2C2021)&style_id=-1&order=3&st=1&sort=0&page=1"
+     >www.bilibili.com</a
+    >
+   </li>
+   <li>
+    <a href="https://fanyi.baidu.com/?aldtype=16047#auto/zh">baidufanyi</a>
+   </li>
+  </ul>
+  <script>
+   EventUtil.addHandler(window, "load", function (event) {
+    var div = document.getElementById("myDiv");
+    //右键上下文菜单
+    EventUtil.addHandler(div, "contextmenu", function (event) {
+     event = EventUtil.getEvent(event);
+     EventUtil.preventDefault(event);
+
+     var menu = document.getElementById("myMenu");
+     menu.style.left = event.clientX + "px";
+     menu.style.top = event.clientY + "px";
+     menu.style.visibility = "visible";
+    });
+
+    EventUtil.addHandler(document, "click", function (event) {
+     document.getElementById("myMenu").style.visibility = "hidden";
+    });
+   });
+
+   //离开网页的时候询问用户是否离开
+   EventUdtil.addHandler(window, "beforeunload", function (event) {
+    event = EventUtil.getEvent(event);
+    var message = "是否离开？？？？？？？？？？？？？？？？？？？？？？？？";
+    event.returnValue = message;
+    return message;
+   });
+  </script>
+ </body>
+</html>

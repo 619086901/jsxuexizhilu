@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <canvas id="drawing" width="400" height="400" style="border: 1px solid red"></canvas>
+  <script>
+   var drawing = document.getElementById('drawing');
+
+   if (drawing.getContext) {
+    //能力检测游览器支持<canvas>
+    var context = drawing.getContext('2d');
+
+    context.beginPath(); //开始路径
+
+    context.arc(100, 100, 99, 0, 2 * Math.PI, false); //绘制弧线
+    //(x,y,半径,起始角度，结束角度(要用弧度表示),flase为顺时针方向)
+    //Math.PI=3.14 弧度表示也为3.14也就是180度
+
+    //moveTo(x,y)绘制光标移动
+    context.moveTo(194, 100);
+    context.arc(100, 100, 94, 0, 2 * Math.PI, false);
+
+    context.translate(100, 100); //把原点移到(x,y)
+
+    //旋转表针
+    context.rotate(1);
+    //分针
+    context.moveTo(0, 0);
+    context.lineTo(0, -85);
+    //lineTo(x,y)绘制直线
+
+    //时针
+    context.moveTo(0, 0);
+    context.lineTo(-65, 0);
+
+    context.stroke(); //描边路径
+   }
+  </script>
+ </body>
+</html>

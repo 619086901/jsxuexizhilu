@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let parser = new DOMParser(); //解析为DOM文档
+      let xmldom = parser.parseFromString('<root><child/></root>', 'text/xml');
+
+      let result = xmldom.evaluate(
+        'employee/name',
+        xmldom.documentElement,
+        null,
+        XPathResult.ANY_TYPE,
+        null
+      );
+
+      if (result !== null) {
+        switch (result.resultType) {
+          case XPathResult.STRING_TYPE:
+            //处理字符串类型
+            break;
+          case XPathResult.NUMBER_TYPE:
+            //处理数值类型
+            break;
+          case XPathResult.BOOLEAN_TYPE:
+            //处理布尔值类型
+            break;
+          case XPathResult.UNORDERED_NODE_ITERATOR_TYPE:
+            //处理无序节点迭代器类型
+            break;
+          default:
+          //处理其他可能的结果类型
+        }
+      }
+    </script>
+  </body>
+</html>

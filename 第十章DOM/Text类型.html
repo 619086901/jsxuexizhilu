@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function hebing() {
+        var element = document.createElement("div");
+        element.className = "message";
+
+        var textNode = document.createTextNode("Hello world!");
+        element.appendChild(textNode);
+
+        var anotherTextNode = document.createTextNode("Yippee!");
+        element.appendChild(anotherTextNode);
+
+        document.body.appendChild(element);
+        document.writeln("合并节点normalize()<br>");
+        document.writeln(
+          "element.childNodes.length=" + element.childNodes.length + "<br>"
+        );
+
+        element.normalize();
+        document.writeln(
+          "element.childNodes.length=" + element.childNodes.length + "<br>"
+        );
+        document.writeln(
+          "element.firstChild.nodeValue=" +
+            element.firstChild.nodeValue +
+            "<br>"
+        );
+      }
+
+      function fenge() {
+        var element = document.createElement("div");
+        element.className = "massage";
+
+        var textNode = document.createTextNode("Hello world!");
+        element.appendChild(textNode);
+        document.body.appendChild(element);
+        document.writeln("<br>分割节点splitText(分割开始位置)<br>");
+        document.writeln(
+          "element.firstChild.nodeValue=" +
+            element.firstChild.nodeValue +
+            "<br>"
+        );
+        var newNode = element.firstChild.splitText(5);
+        document.writeln(
+          "element.firstChild.nodeValue=" +
+            element.firstChild.nodeValue +
+            "<br>"
+        );
+        document.writeln("newNode.nodeValue=" + newNode.nodeValue + "<br>");
+        document.writeln(
+          "element.childNodes.length=" + element.childNodes.length + "<br>"
+        );
+      }
+
+      hebing();
+      fenge();
+    </script>
+  </body>
+</html>

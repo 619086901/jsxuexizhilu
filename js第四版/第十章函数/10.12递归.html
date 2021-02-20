@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <script>
+         const factorial = function f(num) {
+            if (num <= 1) {
+               return 1;
+            } else {
+               return num * f(num - 1);
+            }
+         };
+         console.log(factorial(6));
+         //使用命名函数表达式调用自身来递归
+      </script>
+   </body>
+</html>

@@ -1,0 +1,17 @@
+<script>
+  let processor = new XSLTProcessor()
+  processor.importStylesheet(xsltdom)
+  //加载两个文档
+
+  processor.setParameter('命名空间URL', 'message', 'hello')
+  processor.getParameter(null, '参数本地名称', '要设置的值')
+  processor.removeParameter(null, 'message')
+  //条件要在transformToDocument之前使用
+  processor.transformToDocument(xmldom)
+  //返回完整的DOM文档
+
+  let fragment = processor.transformToFragment(xmldom, document)
+  //要转换的XML DOM和拥有结果片段的文档
+  let a = document.getElementById('div')
+  a.appendChild(fragment)
+</script>

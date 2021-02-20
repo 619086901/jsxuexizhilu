@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <script>
+        window.resizeTo(screen.availWidth,screen.availHeight);//调整大小
+        document.write(screen.availWidth+" "+screen.availHeight);
+
+        history.back()//后退一页
+        history.forward()//前进一页
+        //检测插件（在IE中无效）
+        function hasPlugin(name){
+            name=name.toLowerCase();
+            for(var i=0;i<navigator.plugins.length;i++){
+                if(navigator.plugins[i].name.toLowerCase().indexOf(name)>-1){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        //检测IE中的插件
+        function hasIEPlugin(name){
+            try {
+                new ActiveXObject(name);
+                return true;
+            } catch (ex) {
+                return false;
+            }
+        }
+
+        //检测所有游览器中的Flash
+        function hasFlash(){
+            var result=hasPlugin("Flash");
+            if(!result){
+                result=hasIEPlugin("ShockwaveFlash.ShockwaveFlash");
+            }
+            return result;
+        }
+
+        //检测所有游览器中的QuickTime
+        function hasQuickTime(){
+            var result=hasPlugin("QuickTime");
+            if(!result){
+                result=hasIEPlugin("QuickTime.QuickTime");
+            }
+            return result;
+        }
+
+        document.write(hasFlash()+"<br>");
+        document.write(hasQuickTime());
+
+    </script>
+</body>
+</html>

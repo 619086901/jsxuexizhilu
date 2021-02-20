@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="myDiv" data-appid="123" data-myname="Nicholas"></div>
+    <script>
+      //取得值
+      var div = document.getElementById("myDiv");
+      var appId = div.dataset.appid;
+      var myName = div.dataset.myname;
+      document.write("appid=" + appId + " myName=" + myName + "<br>");
+
+      //设置值
+      div.dataset.appId = "456";
+      div.dataset.myName = "Michael";
+      document.write("appid=" + appId + " myName=" + myName + "<br>");
+
+      //有没有"myname"值呢？
+      if (div.dataset.myname) {
+        document.write("有");
+      } else {
+        document.write("没有");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <script>
+         let p1 = new Promise(function (resolve, reject) {
+            resolve(1);
+         });
+         let p2 = new Promise(function (resolve, reject) {
+            resolve(2);
+         });
+         let p3 = new Promise(function (resolve, reject) {
+            resolve(3);
+         });
+         Promise.all([p1, p2, p3])
+            .then(function (results) {
+               console.log('success:' + results);
+            })
+            .catch(function (r) {
+               console.log('error');
+               console.log(r);
+            });
+
+         //Promise.race()的作用也是同时执行多个实例
+         //只要有一个实例改变状态
+         //Promise就改为那个实例所改变的状态
+      </script>
+   </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="样式表.css" />
+  </head>
+  <style>
+    div.box {
+      background-color: black;
+      width: 100px;
+      height: 200px;
+    }
+  </style>
+  <body>
+    <div></div>
+    <script>
+      var sheet = null;
+      for (var i = 0, len = document.styleSheets.length; i < len; i++) {
+        sheet = document.styleSheets[i];
+        document.write(sheet.href + "<br>");
+      }
+
+      function getStyleSheet(element) {
+        //其他游览器支持sheet，IE支持的是styleSheet
+        return element.sheet || element.styleSheet;
+      }
+
+      var link = document.getElementsByTagName("link")[0];
+      var sheet = getStyleSheet(link);
+      document.write(sheet + "<br>");
+      document.write(sheet.href + "<br>");
+
+      var sheet = document.styleSheets[1];
+      var rules = sheet.cssRules || sheet.rules; //规则列表
+      var rule = rules[0]; //第一条规则
+      document.write(rule.selectorText + "<br>"); //规则名称
+      document.write(rule.style.cssText + "<br>");
+      document.write(rule.style.backgroundColor + "<br>");
+      document.write(rule.style.width + "<br>");
+      document.write(rule.style.height + "<br>");
+      rule.style.backgroundColor = "black";
+      document.write(rule.style.backgroundColor + "<br>");
+
+      function insertRule(sheet, selectorText, cssText, position) {
+        if (sheet.insertRule) {
+          sheet.insertRule(selectorText + "{" + cssText + "}", position);
+        } else if (sheet.addRule) {
+          sheet.addRule(selectorText, cssText, position);
+        }
+      }
+      insertRule(document.styleSheets[1], "body", "background-color:red", 0);
+
+      document.write(rules[0].selectorText + "<br>"); //规则名称
+      document.write(rules[0].cssText + "<br>"); //IE不支持这个属性
+
+      //操作的样式表    规则的索引位置
+      function deleteRule(sheet, index) {
+        if (sheet.deleteRule) {
+          sheet.deleteRule(index);
+        } else if (sheet.removeRule) {
+          sheet.removeRule(index);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="post" name="form">
+        <input type="text" name="usernaame" value=""/>
+        <input type="button" value="Echo Username" onclick="getData()">
+        </form>
+        <script>
+        function getData(){
+            with(document){
+                with(this.form){
+                    with(this){
+                        //元素属性值  
+                        alert(usernaame.value); // 就是这里的usernaame，这个属性是form里面的
+                    }
+                }
+            }
+        }
+        </script>
+    </script>
+  </body>
+</html>

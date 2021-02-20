@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   (async function () {
+    const params = {
+     name: 'AES-CTR',
+     length: 128,
+    };
+    const keyUsages = ['encrypt', 'decrypt'];
+
+    //生成随机密钥
+    const key = await crypto.subtle.generateKey(params, true, keyUsages);
+
+    console.log(key);
+
+    //取得密钥
+    const rawKey = await crypto.subtle.exportKey('raw', key);
+
+    console.log(new Uint8Array(rawKey));
+
+    //相反操作
+    const importedKey = await crypto.subtle.importKey('raw', rawKey, params.name, true, keyUsages);
+
+    console.log(importedKey);
+   })();
+  </script>
+ </body>
+</html>

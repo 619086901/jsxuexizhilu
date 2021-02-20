@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <div id="droptarget">123</div>
+  <img src="C:\Users\61908\Desktop\js\js第四版\20章javascriptAPI\20.5媒体元素\2.png" alt="" />
+  <script>
+   let droptarget = document.getElementById('droptarget');
+
+   droptarget.addEventListener('dragover', event => {
+    //拖动到放置目标上
+    console.log('dragover');
+    event.preventDefault();
+   });
+
+   droptarget.addEventListener('dragenter', event => {
+    //放置目标内事件持续触发
+    console.log('dragenter');
+    event.preventDefault();
+   });
+
+   droptarget.addEventListener('dragleave', event => {
+    //拖到放置目标外
+    console.log('dragleave');
+   });
+   droptarget.addEventListener('drop', event => {
+    //放到目标上
+    console.log('drop');
+   });
+  </script>
+ </body>
+</html>

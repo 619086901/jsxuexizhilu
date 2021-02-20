@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="my1" />
+    <input type="text" id="my2" />
+    <script>
+      var oMy1 = document.getElementById("my1");
+      var oMy2 = document.getElementById("my2");
+      oMy1.focus();
+      document.write(document.hasFocus() + "<br>");
+      function jiazai() {
+        if (document.readyState == "loading") {
+          document.write("正在加载文档" + "<br>");
+        } else if ((document.readyState = "complate")) {
+          document.write("已经加载完文档" + "<br>");
+        }
+      }
+      jiazai();
+
+      if (document.compatMode == "CSS1Compat") {
+        document.write("标准模式" + "<br>");
+      } else {
+        document.write("混杂模式" + "<br>");
+      }
+
+      var head = document.head || document.getElementsByTagName("head")[0];
+      //如果可用就用document.head 否则仍然使用getElementsByTagName()
+
+      document.write(document.charset + "<br>");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="跨游览器的事件对象.js"></script>
+  </head>
+  <body>
+    <ul id="myList">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    <script>
+      var isSupported = document.implementation.hasFeature(
+        "MutationEvents",
+        "2.0"
+      );
+      document.writeln("是否支持变动事件:" + isSupported);
+      EventUtil.addHandler(window, "load", function () {
+        var list = document.getElementById("myList");
+        var haha = document.createElement("li");
+        //发生任何变化时触发
+        EventUtil.addHandler(document, "DOMSubtreeModified", function (event) {
+          console.log("DOMSubtreeModified=" + event.type + "<br>");
+          console.log("DOMSubtreeModified=" + event.target + "<br>");
+        });
+        //节点从其父节点中被移除时触发
+        EventUtil.addHandler(document, "DOMNodeRemoved", function (event) {
+          console.log("DOMNodeRemoved=" + event.type + "<br>");
+          console.log("DOMNodeRemoved=" + event.target + "<br>"); //target事件的目标
+          console.log("DOMNodeRemoved=" + event.relatedNode + "<br>"); //relatedNode父节点
+        });
+        //在一个节点被直接从文档中移除或通过子树间接从文档中移除之前触发
+        EventUtil.addHandler(
+          list.firstChild,
+          "DOMNodeRemovedFromDocument",
+          function (event) {
+            console.log("DOMNodeRemovedFromDocument=" + event.type + "<br>");
+            console.log("DOMNodeRemovedFromDocument=" + event.target + "<br>");
+          }
+        );
+        list.parentNode.removeChild(list);
+      });
+    </script>
+  </body>
+</html>

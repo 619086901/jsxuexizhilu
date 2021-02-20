@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   let numerals = ["I", "II", "III"];
+   let ordinality = 0;
+   function makeKing(name = "Henry", numerals = getNumerals()) {
+    return `King ${name} ${numerals}`;
+   }
+   function getNumerals() {
+    return numerals[ordinality++];
+   }
+   console.log(makeKing());
+   console.log(makeKing("Louis", "XVI"));
+   console.log(makeKing());
+   console.log(makeKing());
+
+   function makeKing2() {
+    let name = "Henry";
+    let numerals = "VIII";
+    return `King ${name} ${numerals}`;
+   }
+   console.log(makeKing2());
+  </script>
+ </body>
+</html>

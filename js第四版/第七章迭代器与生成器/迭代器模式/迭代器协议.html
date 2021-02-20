@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   let arr = ["foo", "baz"];
+   let iter = arr[Symbol.iterator]();
+
+   console.log(iter.next());
+   arr.splice(1, 0, "bar");
+   console.log(iter.next());
+   console.log(iter.next());
+   console.log(iter.next());
+   console.log(iter.next());
+
+   class SuperClass {
+    constructor(option) {
+     this.a = option;
+    }
+
+    fn() {
+     console.log(this.b);
+    }
+
+    static staticMethod() {
+     console.log("静态方法只能通过类调用");
+    }
+
+    set sa(value) {
+     this.a = value;
+    }
+
+    get sa() {
+     return this.a;
+    }
+   }
+
+   class SubClass extends SuperClass {
+    constructor(option) {
+     super(option.a); // 调用父类的构造函数
+     this.b = option.b;
+    }
+   }
+
+   const sub = new SubClass({ a: "aaa", b: "bbb" });
+   sub.sa = "aa";
+   console.log(sub.sa); // aa
+   sub.fn(); // bbb
+   SubClass.staticMethod();
+  </script>
+ </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   class Animal {
+    constructor() {
+     this.type = "animal";
+    }
+    says(say) {
+     document.write(this.type + " says " + say);
+    }
+   }
+
+   class Cat extends Animal {
+    constructor() {
+     super(); //在类中调用构造函数
+     this.type = "cat";
+    }
+   }
+
+   let cat = new Cat();
+   cat.says("hello"); //cat says hello
+   
+  </script>
+ </body>
+</html>

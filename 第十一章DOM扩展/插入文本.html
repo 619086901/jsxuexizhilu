@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="text">hahah</div>
+    <script>
+      var oDiv = document.getElementById("text");
+
+      oDiv.innerText = "Hello & welcome, <b>'text'<\/b>";
+      //   oDiv.innerText = oDiv.innerText;
+      //   document.write(oDiv.innerText);
+      //Firefox不支持innerText
+      //但是支持类似的textContent
+      function setInnerText(element, text) {
+        if (typeof element.textContent == "string") {
+          element.textContent = text;
+        } else {
+          element.innerText = text;
+        }
+      }
+      function getInnerText(element) {
+        return typeof element.textContent == "string"
+          ? element.textContent
+          : element.innerText;
+      }
+      setInnerText(oDiv, "Hello & welcome, <b>'text'<\/b>");
+      document.write(getInnerText(oDiv));
+    </script>
+  </body>
+</html>

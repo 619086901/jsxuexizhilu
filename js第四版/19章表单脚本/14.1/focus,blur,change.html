@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="C:\Users\61908\Desktop\js\第十三章事件\13.4\跨游览器的事件对象.js"></script>
+ </head>
+ <body>
+  <form action="">
+   <input type="text" />
+  </form>
+
+  <script>
+   var textbox = document.forms[0].elements[0];
+
+   EventUtil.addHandler(textbox, "focus", function (event) {
+    event = EventUtil.getEvent(event);
+    var target = EventUtil.getTarget(event);
+    if (target.style.backgroundColor != "red") {
+     target.style.backgroundColor = "yellow";
+    }
+   });
+
+   EventUtil.addHandler(textbox, "blur", function (event) {
+    event = EventUtil.getEvent(event);
+    var target = EventUtil.getTarget(event);
+
+    if (/[^\d]/.test(target.value)) {
+     target.style.backgroundColor = "red";
+    } else {
+     target.style.backgroundColor = "";
+    }
+   });
+
+   EventUtil.addHandler(textbox, "change", function (event) {
+    event = EventUtil.getEvent(event);
+    var target = EventUtil.getTarget(event);
+
+    if (/[^\d]/.test(target.value)) {
+     target.style.backgroundColor = "red";
+    } else {
+     target.style.backgroundColor = "";
+    }
+   });
+  </script>
+ </body>
+</html>

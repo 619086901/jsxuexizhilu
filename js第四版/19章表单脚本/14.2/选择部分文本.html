@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <form>
+   <input type="text" value="范建峰" id="textbox" />
+  </form>
+
+  <script>
+   window.onload = function () {
+    var textbox = document.forms[0].elements["textbox"];
+    textbox.value = "范建峰";
+   };
+
+   function selectText(textbox, startIndex, stopIndex) {
+    if (textbox.setSelectionRange) {
+     textbox.setSelectionRange(startIndex, stopIndex);
+    } else if (textbox.createTextRange) {
+     //IE
+     var range = textbox.createTextRange();
+     range.collapse(true);
+     range.moveStart("character", startIndex);
+     range.moveEnd("character", stopIndex - startIndex);
+     range.select();
+    }
+    textbox.focus();
+   }
+   selectText(textbox, 0, 2);
+  </script>
+ </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        document.write(location.search+"<br>");
+        function getQuerStringArgs(){
+
+            var qs=(location.search.length >0 ? location.search.substring(1) : " "),
+            args={},
+            
+            items=qs.length ? qs.split("&") : [],
+            item=null,
+            name=null,
+            value=null,
+            i=0,
+            len=items.length;
+            for(i=0;i<len;i++){
+                item=items[i].split("=");
+                
+                name=decodeURIComponent(item[0]);
+                
+                value=decodeURIComponent(item[1]);
+
+                if(name.length){
+                    args[name]=value;
+                }
+            }
+            return args;
+        }
+        
+        var a=getQuerStringArgs();
+        document.write(a["q"]);//"javascript"
+        //假如查询的是?q=javascript&num=10 那么a["num"];//"10"
+    </script>
+
+</body>
+</html>

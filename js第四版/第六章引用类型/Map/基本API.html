@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   const m = new Map();
+   const objKey = {},
+    objVal = {},
+    arrKey = [],
+    arrVal = [];
+
+   m.set("firstName", "Matt").set("lastName", "Frisbie");
+
+   document.writeln(m.has("firstName"));
+   document.writeln(m.get("firstName"));
+   document.writeln(m.size + "<br>");
+
+   m.delete("firstName"); //删除一个
+
+   document.writeln(m.has("firstName"));
+   document.writeln(m.get("lastName"));
+   document.writeln(m.size + "<br><br>");
+
+   m.clear(); //清空
+
+   m.set(objKey, objVal);
+   m.set(arrKey, arrVal);
+
+   objKey.foo = "foo";
+   objVal.bar = "bar";
+   arrKey.push("foo");
+   arrVal.push("bar");
+   console.log(m.get(objKey));
+   console.log(m.get(arrKey));
+   document.writeln(m.get(objKey));
+   document.writeln("<br>" + m.get(arrKey));
+  </script>
+ </body>
+</html>

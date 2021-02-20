@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="p1"><b>hello</b> world!</p>
+    <script>
+      var supportsRange = document.implementation.hasFeature("Range", "2.0");
+      var alsoSupportsRange = typeof document.createRange == "function";
+      document.write(supportsRange + " " + alsoSupportsRange + "<br>");
+
+      var range1 = document.createRange(),
+        range2 = document.createRange(),
+        p1 = document.getElementById("p1"),
+        node1 = range1.selectNode(p1),
+        node2 = range2.selectNodeContents(p1);
+      document.write(p1.innerHTML + "<br>");
+      document.write(node1 + "<br>"); //选择节点及子节点
+      document.write(node2 + "<br>"); //选择子节点
+      document.write("startContainer:" + range1.startContainer + "<br>");
+      document.write("endContainer:" + range1.endContainer + "<br>");
+      document.write(
+        "commonAncestorContainer:" + range1.commonAncestorContainer + "<br>"
+      ); //都是body
+      document.write("startOffset:" + range1.startOffset + "<br>");
+      document.write("endOffset:" + range1.endOffset + "<br><br>");
+      document.write(range2.startContainer + "<br>");
+      document.write(range2.endContainer + "<br>");
+      document.write(range2.commonAncestorContainer + "<br>");
+      document.write(range2.startOffset + "<br>");
+      document.write(range2.endOffset + "<br>");
+    </script>
+  </body>
+</html>

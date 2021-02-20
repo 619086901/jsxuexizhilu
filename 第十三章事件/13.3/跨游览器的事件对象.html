@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="http://www.baidu.com">123</a>
+    <script>
+      var EventUtil = {
+        addHandler: function (element, type, handler) {
+          //添加事件处理程序
+          if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+          } else if (element.attachEvent) {
+            element.attachEvent("on" + type, handler);
+          } else {
+            element["on" + type] = handler;
+          }
+        },
+
+        getEvent: function (event) {
+          return event ? event /*DOM*/ : window.event; //IE
+        },
+
+        getTarget: function (event) {
+          return event.target || event.srcElement;
+        },
+
+        preventDefault: function (event) {
+          //默认行为
+          if (event.preventDefault) {
+            event.preventDefault();
+          } else {
+            event.returnValue = false;
+          }
+        },
+
+        removeHandler: function (element, type, handler) {
+          //移除
+          if (element.removeEventListener) {
+            element.removeEventListener(type, handler, false);
+          } else if (element.detachEvent) {
+            element.detachEvent("on" + type, handler);
+          } else {
+            element["on" + type] = null;
+          }
+        },
+
+        stopPropagation: function (event) {
+          //停止冒泡
+          if (event.stopPropagation) {
+            //检测有没有这个方法，有的话返回这个方法
+            event.stopPropagation();
+          } else {
+            event.cancelBubble = true;
+          }
+        },
+      };
+
+      //页面完全加载后load
+      EventUtil.addHandler(window, "load", function () {
+        var link = document.createElement("link");
+        link.type = "text/css";
+        link.rel = "stylesheet";
+        EventUtil.addHandler(link, "load", function (event) {
+          alert("加载好了");
+        });
+        link.href = "example.css";
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+
+      //unload文档被完全卸载后触发
+      //一般用来清除引用，避免内存泄漏
+      EventUtil.addHandler(window, "unload", function (event) {
+        alert("123");
+      });
+
+      //resize调整到一个新的高度或宽度时
+      //每个游览器都不一样 不要在里面写入大量代码 因为会频繁执行
+      EventUtil.addHandler(window, "resize", function (event) {
+        alert("resize");
+      });
+
+      //scroll
+    </script>
+  </body>
+</html>

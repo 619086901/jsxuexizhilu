@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="tz.css" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      html,
+      body {
+        user-select: none;
+        height: 100%;
+      }
+      .screen {
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+        background-color: rgba(102, 30, 30, 0.8);
+      }
+      .send {
+        position: absolute;
+
+        bottom: 0;
+        width: 100%;
+        height: 80px;
+        line-height: 80px;
+        background-color: rgba(0, 0, 0, 0.8);
+        text-align: center;
+      }
+      input {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -20px -350px;
+        float: left;
+      }
+      .text {
+        float: left;
+        width: 600px;
+        height: 40px;
+        border: none;
+        border-radius: 5px 5px 5px 5px;
+      }
+      .btn {
+        float: left;
+        position: absolute;
+        color: white;
+        background-color: green;
+        line-height: 40px;
+        width: 100px;
+        font-size: 16px;
+        cursor: pointer;
+        left: 50%;
+        top: 50%;
+        margin: -20px 150px;
+      }
+      .s_show div {
+        font-size: 24px;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="screen">
+      <div class="send">
+        <div class="input clearfix">
+          <input type="text" class="text" />
+          <div class="btn" onclick="tianjia()">发送弹幕</div>
+        </div>
+      </div>
+
+      <div class="s_show">
+        <div class="magictime twisterInUp">浙江师范大学</div>
+        <div class="magictime twisterInUp">201831950123</div>
+        <div class="magictime twisterInUp">范建峰</div>
+        <div class="magictime twisterInUp">邪恶小法师</div>
+        <div class="magictime twisterInUp">维迦</div>
+      </div>
+    </div>
+    <script>
+      var oShowList = document.querySelectorAll('.s_show div'),
+        oSend = document.querySelector('.send')
+      for (var i = 0; i < oShowList.length; i++) {
+        init(oShowList[i])
+      }
+      var arr = []
+
+      function tianjia() {
+        var text = document.querySelector('.text').value
+        var div = document.createElement('div')
+        var screenHeight = document.documentElement.clientHeight, //获取高度
+          screenWidth = document.documentElement.clientWidth,
+          sengHeight = oSend.clientHeight,
+          sengWidth = oSend.clientWidth,
+          maxtop = screenHeight - sengHeight,
+          maxleft = screenWidth
+        div.className = 'magictime twisterInUp'
+        div.innerHTML = text
+        div.style.left = maxleft + Math.random() * 100 + 'px'
+        div.style.top = Math.random() * maxtop + 'px'
+        console.log(text)
+        console.log(div)
+        var show = document.querySelector('.s_show')
+        console.log(show)
+        show.appendChild(div)
+        var oShowList = document.querySelectorAll('.s_show div')
+        init(oShowList[oShowList.length - 1])
+      }
+
+      function init(obj) {
+        var screenHeight = document.documentElement.clientHeight, //获取高度
+          screenWidth = document.documentElement.clientWidth,
+          sengHeight = oSend.clientHeight,
+          sengWidth = oSend.clientWidth,
+          maxtop = screenHeight - sengHeight - obj.clientHeight,
+          maxleft = screenWidth - obj.clientWidth
+        obj.style.top = Math.random() * maxtop + 'px' //(0,1)*16==(0*16,1*16) 随机数
+        obj.style.left = maxleft + Math.random() * 100 + 'px'
+        obj.style.color = randomColor()
+        move(obj, maxleft)
+      }
+
+      function move(obj, maxleft) {
+        maxleft -= 4
+        obj.style.left = maxleft + 'px'
+        if (maxleft > -obj.clientWidth) {
+          requestAnimationFrame(function () {
+            move(obj, maxleft)
+          }) //H5新增动画行数
+        } else {
+          init(obj)
+        }
+      } //移动函数
+
+      function randomColor() {
+        var color = '#'
+        for (var i = 0; i < 6; i++) {
+          color += Math.floor(Math.random() * 16).toString(16)
+        }
+        return color
+      } //随机颜色的函数
+    </script>
+  </body>
+</html>

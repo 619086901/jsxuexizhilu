@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   class Person {
+    constructor() {
+     this.name = new String("Jack");
+
+     this.sayName = () => console.log(this.name);
+
+     this.nicknames = ["Jake", "J-Dog"];
+    }
+   }
+
+   let p1 = new Person(),
+    p2 = new Person();
+
+   p1.name = p1.nicknames[0];
+   p2.name = p2.nicknames[1];
+
+   p1.sayName();
+   p2.sayName();
+
+   class Person1 {
+    set name(newName) {
+     this.name_ = newName;
+    }
+
+    get name() {
+     return this.name_;
+    }
+   }
+
+   console.log("p2");
+   let p = new Person1();
+   p.name = "Jack";
+   console.log(p.name); //Jack
+
+   class Person2 {
+    constructor() {
+     this.locate = () => console.log("instance", this);
+    }
+
+    locate() {
+     console.log("prototype", this);
+    }
+    //静态类，定义在类本身上,this引用自身
+    static locate() {
+     console.log("class", this);
+    }
+   }
+   console.log("p3");
+   let p3 = new Person2();
+   p3.locate();
+   Person2.prototype.locate();
+   Person2.locate();
+
+   class Person3 {
+    sayName() {
+     console.log(`${Person3.greeting} ${this.name}`);
+    }
+   }
+
+   Person3.greeting = "My name is";
+
+   Person3.prototype.name = "Jack";
+
+   let p4 = new Person3();
+   p4.sayName();
+
+   //迭代器与生成器方法
+
+   class Person4 {
+    *createNicknameIterator() {
+     yield "Jack";
+     yield "Jake";
+     yield "J-Dog";
+    }
+
+    static *createJobIterator() {
+     yield "Butcher";
+     yield "Baker";
+     yield "Candlestick maker";
+    }
+
+    constructor() {
+     this.nicknames = ["Jack", "Jake", "J-Dog"];
+    }
+
+    [Symbol.iterator]() {
+     return this.nicknames.entries();
+    }
+   }
+   console.log("p4");
+   let jobIter = Person4.createJobIterator();
+   console.log(jobIter.next().value);
+   console.log(jobIter.next().value);
+   console.log(jobIter.next().value);
+
+   let p5 = new Person4();
+   let nicknameIter = p5.createNicknameIterator();
+   console.log(nicknameIter.next().value);
+   console.log(nicknameIter.next().value);
+   console.log(nicknameIter.next().value);
+
+   for (let [idx, nickname] of p5) {
+    console.log(nickname);
+   }
+  </script>
+ </body>
+</html>

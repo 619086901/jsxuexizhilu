@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module" src="1.js">
+      //支持模块的游览器会执行
+      //不支持模块的游览器不会执行
+    </script>
+
+    <script nomodule src="js.js">
+      //支持模块的游览器不会执行
+      //不支持模块的游览器会执行
+    </script>
+    //从而保证了一定会执行一部分脚本
+  </body>
+</html>

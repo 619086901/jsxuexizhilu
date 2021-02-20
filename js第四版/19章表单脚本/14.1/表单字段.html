@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <form method="post" id="myFrom">
+   <ul>
+    <li><input type="radio" name="color" id="color" value="red" />red</li>
+    <li><input type="radio" name="color" id="color" value="green" /></li>
+    <li><input type="radio" name="color" id="color" value="blue" /></li>
+   </ul>
+  </form>
+
+  <script>
+   (function ziduan() {
+    var form = document.getElementById("myFrom");
+    var colorField = form.elements["color"];
+    console.log(colorField.length);
+
+    var firstColorField = colorField[0];
+    var firstFormField = form.elements[0];
+    console.log(firstColorField);
+    console.log(firstFormField);
+    console.log(firstColorField === firstFormField);
+   })();
+  </script>
+ </body>
+</html>

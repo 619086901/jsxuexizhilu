@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <input type="file" name="" id="files-list" />
+ <body>
+  <script>
+   let filesList = document.getElementById('files-list');
+   filesList.addEventListener('change', event => {
+    let files = event.target.files,
+     i = 0,
+     len = files.length;
+
+    while (i < len) {
+     const f = files[i];
+     console.log(`${f.name} ${f.type} ${f.size} `);
+     i++;
+    }
+   });
+
+   //可以访问文件的信息
+  </script>
+ </body>
+</html>

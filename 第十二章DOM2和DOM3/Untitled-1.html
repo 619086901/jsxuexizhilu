@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<xhtml:html lang="en" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      style="width: 200px; height: 200px; border: 1px solid red"
+      id="svg"
+    ></svg>
+
+    <script>
+      var supportsDOM2Core = document.implementation.hasFeature("Core", "2.0");
+      var supportsDOM3Core = document.implementation.hasFeature("Core", "3.0");
+      var supportsDOM2HTML = document.implementation.hasFeature("HTML", "2.0");
+      var supportsDOM2Views = document.implementation.hasFeature(
+        "Views",
+        "2.0"
+      );
+      var supportsDOM2XML = document.implementation.hasFeature("XML", "2.0");
+      document.writeln(supportsDOM2Core);
+      document.writeln(supportsDOM3Core);
+      document.writeln(supportsDOM2HTML);
+      document.writeln(supportsDOM2Views);
+      document.writeln(supportsDOM2XML + "<br>");
+
+      var oHtml = document.documentElement;
+      document.writeln(oHtml.localName + "<br>");
+      document.writeln(oHtml.tagName + "<br>");
+      document.writeln(oHtml.namespaceURI + "<br>");
+      document.writeln(oHtml.prefix + "<br><br>");
+
+      var oSvg = document.querySelector("#svg");
+      document.writeln(oSvg.localName + "<br>");
+      document.writeln(oSvg.namespaceURI + "<br>");
+      document.writeln(oSvg.prefix + "<br><br>");
+
+      //s
+      document.writeln(
+        oSvg.lookupPrefix("http://www.w3.org/1999/xhtml") + "<br>"
+      );
+
+      //http://www.w3.org/1999/xhtml
+      document.writeln(oSvg.lookupNamespaceURI("xhtml") + "<br>");
+
+      //true
+      document.write(
+        document.body.isDefaultNamespace("http://www.w3.org/1999/xhtml") +
+          "<br>"
+      );
+
+      var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      document.write(svg.lookupPrefix("http://www.w3.org/2000/svg"));
+
+      //(namespaceURI,tagName)
+      var elems = document.getElementsByTagNameNS(
+        "http://www.w3.org/1999/xhtml",
+        "*"
+      );
+      document.write("<br>" + elems[0].innerText);
+    </script>
+  </body>
+</xhtml:html>

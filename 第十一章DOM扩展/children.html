@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul class="ul1">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    <script>
+      var oUl = document.querySelector(".ul1");
+      var childCount = oUl.children.length;
+      var firstChild = oUl.children[0];
+      document.write(childCount + "<br>");
+      document.write(firstChild.innerHTML + "<br>");
+
+      //检测后代节点contains()
+      document.write(document.documentElement.contains(document.body)); //body是不是html元素的后代
+    </script>
+  </body>
+</html>

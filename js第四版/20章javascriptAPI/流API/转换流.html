@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   //enqueue()转入控制器
+   async function* ints() {
+    for (let i = 0; i < 5; ++i) {
+     yield await new Promise(resolve => setTimeout(resolve, 1000, i));
+    }
+   }
+
+   //转换流
+   const { writable, readable } = new TransformStream({
+    transform(chunk, controller) {
+     controller.enqueue(chunk * 2);
+    },
+   });
+
+   //getReader()读取器
+   const readableStreamDefaultReader = readable.getReader();
+   //读取器的read()读出值
+   (async function () {
+    while (true) {
+     const { done, value } = await readableStreamDefaultReader.read();
+     if (done) {
+      break;
+     } else {
+      console.log(value);
+     }
+    }
+   })();
+
+   //获得的数据写入流
+   const writableStreamDefaultWriter = writable.getWriter();
+   (async function () {
+    for await (let chunk of ints()) {
+     await writableStreamDefaultWriter.ready;
+     writableStreamDefaultWriter.write(chunk);
+    }
+    writableStreamDefaultWriter.close(); //关闭流
+   })();
+  </script>
+ </body>
+</html>

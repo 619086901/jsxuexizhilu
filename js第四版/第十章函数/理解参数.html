@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   function doadd(num1, num2) {
+    arguments[1] = 10;
+    console.log(arguments[0] + num2);
+   }
+
+   doadd(10, 30);
+
+   function foo() {
+    let bar = () => {
+     console.log(arguments[0]);
+    };
+    bar();
+   }
+   foo(10);
+
+   //箭头函数不能使用arguments,但可以在包装函数中把它提供给箭头函数
+  </script>
+ </body>
+</html>

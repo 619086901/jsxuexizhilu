@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="div1">
+      <p><b>Hello</b>world!</p>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </div>
+    <script>
+      var oDiv = document.getElementById("div1");
+      var iterator = document.createNodeIterator(
+        oDiv, //根节点
+        NodeFilter.SHOW_ELEMENT, //显示元素节点类型
+        null, //接受还是拒绝某种特定节点(过滤器)
+        false
+      );
+      var node = iterator.nextNode();
+      while (node !== null) {
+        document.write(node.tagName + "<br>");
+        node = iterator.nextNode();
+      }
+
+      document.write("<br>");
+
+      var walker = document.createTreeWalker(
+        oDiv,
+        NodeFilter.SHOW_ELEMENT,
+        null,
+        false
+      );
+
+      var node = walker.nextNode();
+      document.write(node === walker.currentNode);
+      while (node !== null) {
+        document.write(node.tagName + "<br>");
+        node = walker.nextNode(); //前进一步
+      }
+
+      var walker = document.createTreeWalker(
+        oDiv,
+        NodeFilter.SHOW_ELEMENT,
+        null,
+        false
+      );
+      document.write(walker.firstChild() + "<br>"); //转到<p>(当前节点第一个子节点)
+      document.write(walker.nextSibling() + "<br>"); //转到<ul>(当前节点的下一个同辈节点)
+      var node = walker.firstChild(); //转到第一个<li>
+      while (node !== null) {
+        document.write(node.tagName + "<br>");
+        node = walker.nextSibling();
+      }
+
+      var node = walker.nextNode();
+      walker.currentNode = document.body; //修改起点
+    </script>
+  </body>
+</html>

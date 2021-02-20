@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //这样就会死循环，每次都会检测length的值
+      var divs = document.getElementsByTagName("div"),
+        i,
+        div;
+
+      for (i = 0; i < divs.length; i++) {
+        div = document.createElement("div");
+        document.body.appendChild(div);
+      }
+
+      //
+      var divs = document.getElementsByTagName("div"),
+        i,
+        len,
+        div;
+
+      for (i = 0, len = divs.length; i < len; i++) {
+        div = document.createElement("div");
+        document.body.appendChild(div);
+      }
+    </script>
+  </body>
+</html>

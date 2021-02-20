@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="123" id="myBtn" />
+    <script>
+      var but1 = document.getElementById("myBtn");
+      var handler = function () {
+        alert("haha");
+      };
+      but1.attachEvent("onclick", handler); //事件内部作用域是全局
+
+      but1.detachEvent("onclick", handler); //新版本IE不支持，老的支持
+    </script>
+  </body>
+</html>

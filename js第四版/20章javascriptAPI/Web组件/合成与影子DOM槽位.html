@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   //创建一个元素作为影子宿主
+   document.body.innerHTML = `<div>
+    <p slot="foo">Foo</p>
+    <p slot="bar">Bar</p>
+    </div>`;
+
+   //添加影子DOM并向其中插入HTMl
+   document.querySelector('div').attachShadow({ mode: 'open' }).innerHTML = `<div id="bar">
+      <slot name="bar" style="color:red"></slot>
+      <slot name="foo"></slot>
+      </div>`;
+   //原来的内容替代了<slot>
+   //其实就是把内容投射到<slot>中，实际的元素还在外部
+   console.log(document.querySelector('p').parentElement);
+  </script>
+ </body>
+</html>

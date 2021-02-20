@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   function Person() {}
+
+   Person.prototype = {
+    //constructor==Person的值为false了，这样封装写法 下面是解决方法
+    constructor: Person,
+    name: "Nicholas",
+    age: 29,
+    sayName() {
+     console.log(this.name);
+    },
+   };
+
+   //也可以这样
+   Object.defineProperty(Person.prototype, "constructor", {
+    enumerable: false,
+    value: Person,
+   });
+
+   let person1 = new Person();
+   let person2 = new Person();
+   person1.sayName();
+
+   person1.name = "Greg";
+   console.log(person1.name);
+   console.log(person2.name);
+   //hasOwnProperty()确定来自实例还是原型 实例返回true
+   console.log(person1.hasOwnProperty("name"));
+
+   delete person1.name;
+   console.log(person1.name);
+
+   console.log(Object.getOwnPropertyNames(Person.prototype));
+   console.log(Object.values(Person.prototype));
+   console.log(Object.entries(Person.prototype));
+  </script>
+ </body>
+</html>

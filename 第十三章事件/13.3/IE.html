@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="3" id="but1" />
+    <input type="button" value="4" id="but2" />
+    <script>
+      var but1 = document.getElementById("but1");
+      but1.onclick = function () {
+        alert(window.event.srcElement === this);
+      };
+
+      but1.attachEvent("onclick", function (event) {
+        //event的属性srcElement指向事件的目标
+        //this等于全局作用域window
+        alert(event.srcElement === this); //false //IE版本低的可以
+      });
+
+      //IE8的
+      var but2 = document.getElementById("but2");
+      but2.onclick = function () {
+        alert("Clicked");
+        window.event.cancelBubble = true;
+      };
+
+      document.body.onclick = function () {
+        alert("body");
+      };
+    </script>
+  </body>
+</html>

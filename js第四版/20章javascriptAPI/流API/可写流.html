@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   async function* ints() {
+    for (let i = 0; i < 5; ++i) {
+     yield await new Promise(resolve => setTimeout(resolve, 1000, i));
+    }
+   }
+
+   //write()获得写入的数据
+   const writableStream = new WritableStream({
+    write(value) {
+     console.log(value);
+    },
+   });
+
+   //获得的数据写入流
+   const writableStreamDefaultWriter = writableStream.getWriter();
+   (async function () {
+    for await (let chunk of ints()) {
+     await writableStreamDefaultWriter.ready;
+     writableStreamDefaultWriter.write(chunk);
+    }
+    writableStreamDefaultWriter.close(); //关闭流
+   })();
+  </script>
+ </body>
+</html>

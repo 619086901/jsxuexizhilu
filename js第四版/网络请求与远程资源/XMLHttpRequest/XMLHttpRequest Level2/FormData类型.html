@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="user-info">
+      <select name="select1" id="" multiple>
+        <option value="1">我的value=1</option>
+        <option>wodevalue=2</option>
+      </select>
+      <select name="select2" id="">
+        <option value="3">wodevalue=3</option>
+        <option>wodevalue=4</option>
+      </select>
+
+      <input type="submit" name="submit" id="submit" />
+      <input type="reset" name="reset" />
+      <input type="button" value="123" name="button" />
+    </form>
+  </body>
+  <script>
+    // let data = new FormData();
+    // data.append('name', 'fanjianfeng'); //键和值
+    //data=new Fromdata(document.forms[0])
+
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if ((xhr.readyState = 4)) {
+        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+          console.log(xhr.responseText);
+        } else {
+          console.log(
+            'status:响应的HTTP状态:' +
+              xhr.status +
+              '; 0：未初始化 尚未调用open();' +
+              ' 1:已打开 尚未调用send();' +
+              ' 2:未收到响应;' +
+              ' 3：收到部分响应;' +
+              ' 4:收到所有响应;'
+          );
+        }
+      }
+    };
+    xhr.open('post', '2.php', true);
+    let form = document.getElementById('user-info');
+    xhr.timeout = 1000; //设置一秒超时
+    // xhr.overrideMimeType('text/xml'); //当成XML处理而不是纯文本
+    xhr.send(new FormData(form));
+  </script>
+</html>

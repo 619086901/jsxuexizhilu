@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <ul id="liebiao">
+      <li id="danji">单击我1</li>
+      <li id="li2">2</li>
+      <li>3</li>
+    </ul>
+
+    <script>
+      function ulcilck(ulid, fun) {
+        var oUl = document.getElementById(ulid);
+        oUl.onclick = fun;
+      }
+
+      ulcilck("liebiao", function () {
+        var oDanji = document.getElementById("danji");
+        var fq = oDanji.parentNode;
+        document.write("父亲节点=" + fq + "<br>");
+
+        document.write("父亲节点内容:" + fq.innerHTML);
+        document.write("父亲节点中子节点内容:<br>" + fq.innerText + "<br>");
+
+        var oLi2 = document.getElementById("li2");
+        var xd = oLi2.previousSibling;
+        //previousSibling前一个兄弟节点(也会获取空白文本)
+        var xd2 = oLi2.previousElementSibling;
+        //previousElementSibling(兄弟元素)IE8一下不支持，了解一下就可以了
+        var xiaxd = oLi2.nextSibling;
+
+        document.write("兄弟节点:" + xd.innerText + "<br>");
+        document.write("兄弟节点:" + xd2.innerText + "<br>");
+        document.write("下一个兄弟:" + xiaxd + "<br>");
+
+        if (fq.nodeType == 1) {
+          document.write("我是元素<br>");
+        }
+
+        var erzi = fq.childNodes;
+        document.write("列表<br>");
+        for (var i = 0; i < erzi.length; i++) {
+          document.write(erzi[i] + "<br>");
+        }
+        document.write("erzi.length=" + erzi.length + "<br>");
+        //childNodes属性会获取包括文本在内的所有节点 包括空格
+        //在IE8中的游览器，不会将空白文本当成子节点。
+        //该属性会返回3个，而不是7个。
+
+        document.write("oUl.firstChild=" + fq.firstChild + "<br>");
+        //firstChild可以获取当前元素的第一个子节点（包括空白文本节点）
+        document.write("oUl.lastChild=" + fq.lastChild + "<br>");
+
+        var erzi2 = fq.children;
+        //children当前元素的所有子元素
+        document.write("erzi2.length=" + erzi2.length + "<br>");
+
+        var count = fq.childNodes.length;
+        document.write("<br>oUl.childNodes[0]=" + fq.childNodes[0] + "<br>");
+        document.write("count=" + count + "<br>");
+
+        var returnedNode = fq.appendChild(fq.firstChild);
+        //appendChild向末尾传入一个节点，该节点是这里面的则该节点就会成为最后一个节点
+        //insertBefore(要插入的节点，作为参照的节点)
+        //replaceChild(要插入的节点，要替换的节点)
+        //cloneNode(true);复制
+        document.write(returnedNode == fq.firstChild);
+        document.write("<br>");
+        document.write(returnedNode == fq.lastChild);
+        document.write("<br>");
+        //appendChild用于向childNodes列表的末尾添加一个节点
+        document.write("fq.firstChild=" + fq.firstChild + "<br>");
+        //firstChild可以获取当前元素的第一个子节点（包括空白文本节点）
+        document.write("fq.lastChild=" + fq.lastChild + "<br>");
+        document.write("<br>oUl.childNodes[0]=" + fq.childNodes[0] + "<br>");
+        for (var i = 0; i < erzi.length; i++) {
+          document.write(erzi[i] + "<br>");
+        }
+      });
+    </script>
+  </body>
+</html>

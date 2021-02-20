@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   const textEncoder = new TextEncoder();
+   const decodedText = 'foo';
+   const encodedText = textEncoder.encode(decodedText);
+   //encode()该方法接收一个字符串参数，并以Uint8Array格式返回每个字符的UTF-8
+   //f的UTF-8编码是102
+   //o的UTF-8编码是111
+   console.log(encodedText);
+
+   //流编码
+   async function* chars() {
+    const decodedText = 'foo';
+    for (let char of decodedText) {
+     yield await new Promise(resolve => setTimeout(resolve, 1000, char));
+    }
+   }
+
+   const decodedTextStream = new ReadableStream({
+    async start(controller) {
+     for await (let chunk of chars()) {
+      controller.enqueue(chunk);
+     }
+     controller.close();
+    },
+   });
+
+   const encodedTextStream = decodedTextStream.pipeThrough(new TextEncoderStream());
+
+   const readableStreamDefaultReader = encodedTextStream.getReader();
+
+   (async function () {
+    while (true) {
+     const { done, value } = await readableStreamDefaultReader.read();
+
+     if (done) {
+      break;
+     } else {
+      console.log(value);
+     }
+    }
+   })();
+  </script>
+ </body>
+</html>

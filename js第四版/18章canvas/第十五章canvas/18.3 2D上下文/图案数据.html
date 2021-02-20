@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+
+ <body>
+  <canvas width="500" height="500" id="drawing"></canvas>
+ </body>
+ <script>
+  let drawing = document.querySelector('#drawing');
+
+  if (drawing.getContext) {
+   let context = drawing.getContext('2d');
+   context.beginPath();
+
+   context.arc(75, 75, 50, 0, Math.PI * 2, true); // 圆脸
+   context.moveTo(110, 75);
+
+   context.arc(75, 75, 35, 0, Math.PI, false); // 口(顺时针)
+   context.moveTo(65, 65);
+
+   context.arc(60, 65, 5, 0, Math.PI * 2, true); // 左眼
+   context.moveTo(95, 65);
+
+   context.arc(90, 65, 5, 0, Math.PI * 2, true); // 右眼
+   context.stroke();
+
+   var imgData = context.getImageData(25, 25, 100, 100);
+   for (let i = 0, len = imgData.data.length; i < len; i += 4) {
+    red = imgData.data[i];
+    green = imgData.data[i + 1];
+    blue = imgData.data[i + 2];
+    alpha = imgData.data[i + 3];
+    let average = Math.floor((red + green + blue) / 3);
+    imgData.data[i] = average;
+    imgData.data[i + 1] = average;
+    imgData.data[i + 2] = average;
+   }
+   context.putImageData(imgData, 125, 125);
+  }
+ </script>
+</html>

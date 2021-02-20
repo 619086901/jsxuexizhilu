@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   function* generatorFn() {
+    yield 1;
+    yield 2;
+    yield 3; //出现在嵌套的“非”生成器函数中会抛出语法错误
+    return yield "bar"; //yield能用来输入和输出
+    return "foo";
+   }
+
+   let generatorObject = generatorFn();
+
+   console.log(generatorObject);
+   console.log(generatorObject.next());
+   console.log(generatorObject.next());
+   console.log(generatorObject.next());
+   console.log(generatorObject.next());
+   console.log(generatorObject.next("bar2"));
+
+   console.log(generatorFn);
+   console.log(generatorFn()[Symbol.iterator]);
+
+   console.log(generatorFn());
+   console.log(generatorFn()[Symbol.iterator]());
+
+   for (const x of generatorFn()) {
+    console.log(x);
+   }
+
+   function* nTimes(n) {
+    if (n > 0) {
+     yield* nTimes(n - 1);
+     yield n - 1;
+    }
+   }
+
+   console.log("_=");
+   for (let _ of nTimes(3)) {
+    console.log(_);
+   }
+
+   function* generatorFnA() {
+    for (const x of [1, 2, 3]) {
+     yield x;
+    }
+   }
+   console.log("x=");
+   for (const x of generatorFnA()) {
+    console.log(x);
+   }
+
+   function* generatorFnB() {
+    for (const x of [1, 2, 3]) {
+     yield x;
+    }
+   }
+
+   const g = generatorFnB();
+
+   console.log("x=");
+   for (const x of g) {
+    if (x > 1) {
+     g.return(4); //return()关闭
+    }
+    console.log(x);
+   }
+  </script>
+ </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   function testFinally() {
+    try {
+     //执行
+    } catch (error) {
+     //出错执行
+    } finally {
+     //无论怎么样都会执行
+    }
+   }
+   if (ok) return 0;
+   //throw 自定义错误
+
+   function divide(num1, num2) {
+    if (typeof num1 != 'number' || typeof num2 != 'number') {
+     throw new Error('divide():number');
+    }
+    return num1 / num2;
+    //任何一个参数不是数值则会抛出错误
+    //不用if的时候num1和num2不是数值则返回NaN，这显示不是我想要的返回值
+   }
+  </script>
+ </body>
+</html>

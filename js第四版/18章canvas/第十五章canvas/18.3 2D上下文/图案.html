@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+
+ <body>
+  <canvas width="200" height="200" id="drawing"></canvas>
+  <img id="img1" />
+  <script>
+   let drawing = document.querySelector('#drawing');
+   let image = document.querySelector('#img1');
+   image.setAttribute('src', 'lamp.gif'); //属性名 属性值
+   if (drawing.getContext) {
+    let context = drawing.getContext('2d');
+    image.onload = function () {
+     //等图片加载进来后再执行
+     pattern = context.createPattern(image, 'repeat');
+     context.fillStyle = pattern;
+     context.fillRect(10, 10, 150, 150);
+    };
+   }
+  </script>
+ </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .ul {
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+    }
+    li {
+      width: 100px;
+      height: 100px;
+      float: left;
+      border: 1px solid black;
+    }
+  </style>
+  <body>
+    <div>
+      <ul class="ul">
+        <li class="li"></li>
+        <li></li>
+      </ul>
+      <table>
+        <tr>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      function getElementLeft(element) {
+        var actualLeft = element.offsetLeft;
+        var current = element.offsetParent;
+
+        while (current !== null) {
+          actualLeft += current.offsetLeft;
+          current = current.offsetParent;
+        }
+        return actualLeft;
+      }
+
+      var oul = document.querySelector(".ul");
+      var oli = document.querySelector(".li");
+      document.write("ul:" + "left" + oul.offsetLeft + "<br>");
+      document.write("top" + oul.offsetTop + "<br>");
+      document.write("height" + oul.clientHeight + "<br>");
+      document.write("width" + oul.clientWidth + "<br>");
+      document.write(getElementLeft(oul) + "<br><br>"); //左偏移量
+      document.write("li:" + oli.offsetLeft + "<br>");
+      document.write(oli.offsetTop + "<br>");
+
+      function getViewport() {
+        if (document.compatMode == "BackCompat") {
+          return {
+            width: document.body.clientWidth,
+            height: document.body.clientHeight,
+          };
+        } else {
+          return {
+            width: document.documentElement.clientWidth,
+            height: document.documentElement.clientHeight,
+          };
+        }
+      }
+
+      //滚动大小    overflow设置滚动
+    </script>
+  </body>
+</html>

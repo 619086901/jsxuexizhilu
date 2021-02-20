@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="C:\Users\61908\Desktop\js\第十三章事件\13.4\跨游览器的事件对象.js"></script>
+ </head>
+ <body>
+  <form action="" id="myFrom">
+   <input type="submit" id="submit" />
+   <input type="reset" />
+  </form>
+  <script>
+   (function tijiao() {
+    var form = document.getElementById("myFrom");
+    EventUtil.addHandler(form, "submit", function (event) {
+     event = EventUtil.getEvent(event);
+
+     form.elements["submit"].disabled = true; //禁用提交按钮
+
+     //阻止默认事件
+     EventUtil.preventDefault(event);
+     console.log("提交");
+    });
+   })();
+
+   (function chongzhi() {
+    var form = document.getElementById("myFrom");
+    EventUtil.addHandler(form, "reset", function (event) {
+     event = EventUtil.getEvent(event);
+
+     //阻止默认事件
+     EventUtil.preventDefault(event);
+    });
+   })();
+  </script>
+ </body>
+</html>

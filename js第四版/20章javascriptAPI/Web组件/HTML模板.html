@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <style>
+  #foo2 {
+   font-size: 25px;
+   color: blue;
+  }
+ </style>
+ <body>
+  <template id="foo">
+   <p>fanjianfeng</p>
+  </template>
+  <template id="bar">
+   <p>1</p>
+   <p>2</p>
+   <p>3</p>
+  </template>
+  <div id="foo2"></div>
+  <script>
+   const fragment = new DocumentFragment();
+
+   const foo = document.querySelector('#foo');
+
+   const bar = document.querySelector('#bar');
+
+   fragment.appendChild(document.createElement('p'));
+   fragment.appendChild(document.createElement('p'));
+   fragment.appendChild(document.createElement('p'));
+
+   foo.appendChild(fragment); //转移之后原来的会变成空
+
+   const foo2 = document.getElementById('foo2');
+   foo2.appendChild(document.importNode(bar.content, true)); //克隆
+  </script>
+ </body>
+</html>

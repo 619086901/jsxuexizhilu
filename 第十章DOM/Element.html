@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="myDiv" class="bd" title="Body text" lang="en" dir="ltr"></div>
+    <ul id="myList">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    <script>
+      var div = document.getElementById("myDiv");
+      document.writeln("id=" + div.id);
+      document.writeln("class=" + div.className);
+      document.writeln("title=" + div.title);
+      document.writeln("lang=" + div.lang);
+      document.writeln("dir=" + div.dir);
+
+      document.writeln("<br>取得特性getAttribute():<br>");
+      document.writeln(div.getAttribute("id"));
+      document.writeln(div.getAttribute("class"));
+      document.writeln(div.getAttribute("title"));
+      document.writeln(div.getAttribute("lang"));
+      document.writeln(div.getAttribute("dir"));
+
+      document.writeln("<br>设置特性setAttribute():<br>");
+      div.setAttribute("id", "someOtherId");
+      div.setAttribute("class", "ft");
+      div.setAttribute("title", "Some other text");
+      div.setAttribute("lang", "fr");
+      div.setAttribute("dir", "rtl");
+      document.writeln(div.getAttribute("id"));
+      document.writeln(div.getAttribute("class"));
+      document.writeln(div.getAttribute("title"));
+      document.writeln(div.getAttribute("lang"));
+      document.writeln(div.getAttribute("dir"));
+
+      var oDiv = document.createElement("div"); //创建元素
+      oDiv.id = "myNewDiv";
+      oDiv.className = "box";
+      oDiv.innerText = "我是oDiv";
+      document.body.appendChild(oDiv); //添加元素
+
+      document.writeln("<br>元素子节点<br>");
+      var oUl = document.getElementById("myList");
+      var items = oUl.getElementsByTagName("li");
+      document.writeln(items[0].innerText);
+      document.writeln(items[1].innerText);
+      document.writeln(items[2].innerText);
+    </script>
+  </body>
+</html>

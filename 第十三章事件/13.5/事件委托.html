@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="C:\Users\61908\Desktop\js\第十三章事件\13.4\跨游览器的事件对象.js"></script>
+ </head>
+ <body>
+  <ul id="myLinks">
+   <li id="goSomewhere">1111111</li>
+   <li id="doSomething">2222222</li>
+   <li id="sayHi">3333333</li>
+  </ul>
+  <script>
+   function shijian() {
+    var list = document.getElementById("myLinks");
+
+    EventUtil.addHandler(list, "click", function (event) {
+     event = EventUtil.getEvent(event);
+     var target = EventUtil.getTarget(event);
+
+     switch (target.id) {
+      case "doSomething":
+       document.title = "范";
+       break;
+
+      case "goSomewhere":
+       location.href = "http://www.baidu.com";
+       break;
+      case "sayHi":
+       alert("hi");
+       break;
+     }
+    });
+    list = null;
+   }
+   shijian();
+  </script>
+ </body>
+</html>

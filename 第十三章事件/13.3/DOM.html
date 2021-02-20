@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="1" id="but1" />
+    <input type="button" value="2" id="but2" />
+    <script>
+      var but1 = document.getElementById("but1");
+      var handler = function (event) {
+        switch (event.type) {
+          case "click":
+            alert("Clicked");
+            break;
+
+          case "mouseover":
+            event.target.style.backgroundColor = "red";
+            break;
+
+          case "mouseout":
+            event.target.style.backgroundColor = "blue";
+        }
+      };
+      but1.onclick = handler;
+      but1.onmouseover = handler;
+      but1.onmouseout = handler;
+
+      var but2 = document.getElementById("but2");
+      but2.onclick = function (event) {
+        alert("2");
+        alert("eventPhase=(2处于目标 1捕获 3冒泡阶段)" + event.eventPhase);
+        //停止传播冒泡，传不到body那
+        event.stopPropagation(); //IE8没有用
+      };
+
+      document.body.onclick = function (event) {
+        alert("3");
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var timeoutId=setTimeout(function(){
+            document.write("123<br>");
+        },500);
+        setTimeout(timeoutId,100);//超时调用
+        
+        var a=0;
+        var b=10;
+        function c(){
+            a++;
+            document.write(" a="+a);
+            if(a<b){
+                setTimeout(c,500);
+            }else{
+                document.write("<br>Done");
+            }
+        }
+        setTimeout(c,500);
+
+        var num=0;
+        var max=10;
+        var intervalId=null;
+        function incrementNumber(){
+            num++;
+            document.write(" "+num);
+            if(num==max){
+                clearInterval(intervalId);
+                document.write("结束");
+            }
+        }
+        intervalId=setInterval(incrementNumber,6000);//间隔调用
+        
+    </script>
+
+</body>
+</html>

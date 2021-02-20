@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <script>
+         //await暂停异步函数代码的执行(等待)
+         //只能在异步函数中使用
+         async function foo() {
+            console.log(await Promise.resolve('foo'));
+         }
+         async function bar() {
+            console.log(await 'bar');
+         }
+         async function baz() {
+            console.log('baz');
+         }
+         foo();
+         bar();
+         baz();
+      </script>
+   </body>
+</html>

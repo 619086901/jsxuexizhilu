@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="div1">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </div>
+
+    <div id="div2">
+      <p>This is a</p>
+    </div>
+    <script>
+      var oDiv = document.getElementById("div1");
+
+      oDiv.innerHTML = "<script defer>document.write('h1');<\/script>";
+      document.write(oDiv.innerHTML);
+      oDiv.innerHTML =
+        "<div>&nbsp;</div><script defer>document.write('h2');<\/script>"; //"\/"转义字符
+      document.write(oDiv.innerHTML);
+      oDiv.innerHTML =
+        "<div>&nbsp;</div><input type=\"text\"><script defer>document.write('h3');<\/script>";
+      document.write(oDiv.innerHTML);
+
+      oDiv.innerHTML =
+        '_<style type="text/css">body{background-color:red;}</style>';
+
+      document.write(oDiv.innerHTML + "<br>");
+
+      var oDiv2 = document.getElementById("div2");
+      oDiv2.outerHTML = "<p>This is a paragraph,</p>"; //包括<div>本身
+
+      //内存与性能问题
+      var itemsHtml = "";
+      for (var i = 0, len = oDiv2.length; i < len; i++) {
+        itemsHtml += "<li>" + oDiv2[i] + "</li>";
+        document.write(oDiv2[i]);
+      }
+      oDiv2.innerHTML = itemsHtml; //只对innerHTML执行了一次赋值操作
+    </script>
+  </body>
+</html>

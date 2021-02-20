@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="name"></div>
+    <ul id="mylist"></ul>
+    <script>
+      function UI() {
+        let doc = document;
+        //避免使用全局document对象，把他保存在一个变量里
+        //这样全局查找就只会执行一次
+        let name = doc.getElementById('name');
+      }
+
+      let My = {
+        name: 'fan',
+        sayname() {
+          console.log(this.name);
+        }
+      };
+      My.sayname();
+      //不比较null
+      //引用类型用instanceof
+      //原始类型用typeof检查
+      let values = new Array();
+      if (values instanceof Array) {
+        console.log('是数组');
+      }
+
+      //不使用with语句
+
+      //选择正确的方法
+      //优化循环
+      for (let i = 0; i < values.length; i++) {}
+
+      let i = 0;
+      let j = values.length;
+      if (i < j) {
+        do {
+          //循环体
+        } while (--i >= j);
+      }
+
+      //优化DOM交互
+      let list = document.getElementById('mylist'),
+        fragment = document.createDocumentFragment(),
+        //创建文档片段
+        //选择一次性添加上去
+        item;
+
+      for (let i = 0; i < 10; i++) {
+        item = document.createElement('li');
+        fragment.appendChild(item);
+        item.appendChild(document.createTextNode('Item' + i));
+      }
+      list.appendChild(fragment);
+
+      //使用事件委托
+    </script>
+  </body>
+</html>

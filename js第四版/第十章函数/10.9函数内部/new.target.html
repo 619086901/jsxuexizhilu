@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <script>
+         function King() {
+            if (!new.target) {
+               throw 'King must be instantiated using "new"';
+            }
+            console.log('King instantiated using "new"');
+         }
+         new King();
+         King(); //检测是否使用new关键字调用
+      </script>
+   </body>
+</html>

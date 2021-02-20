@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      //函数声明的特点会函数声明提升到顶端
+      //下面千万不要做
+      let condition = true
+      if (condition) {
+        function sayHi() {
+          console.log('hi')
+        }
+      } else {
+        function sayHi() {
+          console.log('yo')
+        }
+      }
+
+      //改成函数表达式就可以了
+      let sayHi2
+      if (condition) {
+        sayHi2 = function () {
+          console.log('hi')
+        }
+      } else {
+        sayHi2 = function () {
+          console.log('yo')
+        }
+      }
+    </script>
+  </body>
+</html>

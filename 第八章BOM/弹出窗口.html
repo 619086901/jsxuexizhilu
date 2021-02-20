@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+ 
+
+        //html5不支持frameset
+
+        var blocked=false;
+
+        try {
+            var wroxwin=window.open("http://www.baidu.com","wroxWindow","height=400,width=400,top=10,left=10,resizable=yes");
+            wroxwin.resizeTo(1000,500);//调整大小
+            wroxwin.moveTo(100,100);//移动位置坐标
+            //wroxwin.close();//关闭新的窗口
+            wroxwin.opener=null;//断开联系，可以在独立的进程中运行
+            if (wroxwin==null){//检测是否被其他程序阻止的弹出窗口 阻止会错误，所以用try catch来抛出错误
+                blocked=true;
+            }
+        } catch (ex) {
+            blocked=true;
+        }
+        
+        if(blocked){
+            alert("The popup was blocked!");
+        }
+    </script>
+
+</body>
+</html>

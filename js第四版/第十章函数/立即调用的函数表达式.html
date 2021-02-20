@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <script>
+         let divs = document.querySelectorAll('div');
+
+         for (let i = 0; i < divs.length; ++i) {
+            divs[i].addEventListener('click', function () {
+               console.log(i);
+            });
+         }
+         //外面访问不到i
+         //单击对应的就显示对应的索引使用let是块级作用域，外面访问不到
+
+         for (var j = 0; j < divs.length; ++j) {
+            divs[j].addEventListener('click', function () {
+               console.log(j);
+            });
+         } //使用var单击哪一个都是3
+      </script>
+   </body>
+</html>

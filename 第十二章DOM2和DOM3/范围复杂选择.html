@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="p1"><b>hello</b> world!</p>
+  </body>
+  <script>
+    var p1 = document.getElementById("p1"),
+      helloNode = p1.firstChild.firstChild,
+      worldNode = p1.lastChild;
+    var range = document.createRange();
+    document.write(helloNode + "<br>");
+    document.write(range.setStart(helloNode, 2) + "<br>"); //(参照节点，偏移量值)
+    document.write(range.setEnd(worldNode, 3) + "<br>");
+    document.write(range.startContainer + "<br>");
+    document.write(range.endContainer + "<br>");
+    document.write(range.startOffset + "<br>"); //起点偏移量
+    document.write(range.endOffset + "<br>"); //终点偏移量
+
+    //range.deleteContents(); //删除范围所包含的内容(llo wo)
+
+    // var fragment = range.extractContents(); //这个删除后会返回这个值
+    // p1.parentNode.appendChild(fragment);
+
+    var fragment2 = range.cloneContents();
+    p1.parentNode.appendChild(fragment2);
+
+    var span = document.createElement("span");
+    span.style.color = "red";
+    span.appendChild(document.createTextNode("Inserted text"));
+    range.insertNode(span); //范围开始插入一个节点
+
+    var newRange = range.cloneRange(); //复制范围
+
+    range.detach(); //从文档中分离
+    range = null; //解除引用
+  </script>
+</html>

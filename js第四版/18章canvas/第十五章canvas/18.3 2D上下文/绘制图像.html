@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <canvas width="200" height="200" id="drawing"></canvas>
+  <script>
+   let drawing = document.querySelector('drawing');
+
+   if (drawing.getContext) {
+    var context = drawing.getContext('2d');
+
+    let image = document.images[0];
+    context.drawImage(image, 10, 10); //在(10,10)的位置绘制出来
+    //(image,10,10,20,30)大小修改成20,30
+   }
+  </script>
+ </body>
+</html>

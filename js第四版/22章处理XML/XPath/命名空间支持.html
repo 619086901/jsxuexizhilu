@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let jiexi = function (text) {
+        let parser = new DOMParser(); //解析为DOM文档
+        let haha = document.getElementsByTagName('wrox:book');
+        let xmldom = parser.parseFromString(text, 'text/xml');
+        let nsresolver = function (prefix) {
+          switch (prefix) {
+            case 'wrox':
+              return 'http://www.wrox.com/';
+            //其他前缀及返回值
+          }
+        };
+        let result = xmldom.evaluate(
+          'count(wrox:book/wrox:author)',
+          xmldom.documentElement,
+          nsresolver,
+          XPathResult.NUMBER_TYPE,
+          null
+        );
+
+        console.log(result.numberValue);
+      };
+
+      jiexi(`<?xml version="1.0" ?>
+  <wrox:books xmlns:wrox="http://www.wrox.com/" id="wrox">
+   <wrox:book>
+    <wrox:title>fan</wrox:title>
+    <wrox:author>C</wrox:author>
+   </wrox:book>
+   <wrox:book>
+    <wrox:title>Ajax</wrox:title>
+    <wrox:author>zakas</wrox:author>
+    <wrox:author>joe</wrox:author>
+   </wrox:book>
+   </wrox:books>`);
+    </script>
+  </body>
+</html>

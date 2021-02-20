@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class A {
+        // 静态属性
+        static info = '见过你的美,还能爱上谁?';
+        // 静态方法
+        static love() {
+          console.log('小姐姐,看见你就犯困,为情所困,为你所困!');
+          // console.log(this);
+        }
+        // 普通方法,love
+        love() {
+          console.log('我是普通方法....');
+        }
+        // 普通方法,调用静态属性
+        say() {
+          console.log('小姐姐,' + A.info);
+        }
+      }
+      A.love();
+
+      let a1 = new A();
+      // 普通的love方法
+      a1.love();
+      a1.say();
+    </script>
+  </body>
+</html>

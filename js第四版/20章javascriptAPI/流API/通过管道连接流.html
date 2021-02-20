@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   //enqueue()转入控制器
+   async function* ints() {
+    for (let i = 0; i < 5; ++i) {
+     yield await new Promise(resolve => setTimeout(resolve, 1000, i));
+    }
+   }
+
+   //可写流控制器 enqueue()值传入控制器
+   const integerStream = new ReadableStream({
+    async start(controller) {
+     for await (let chunk of ints()) {
+      controller.enqueue(chunk);
+     }
+     controller.close();
+    },
+   });
+
+   //转换流
+   const doublingStream = new TransformStream({
+    transform(chunk, controller) {
+     controller.enqueue(chunk * 2);
+    },
+   });
+
+   //通过管道连接流
+   const pipedStream = integerStream.pipeThrough(doublingStream);
+   //从连接流的输出获取读取器
+   const pipedStreamDefaultReader = pipedStream.getReader();
+
+   //读取器的read()读出值
+   (async function () {
+    while (true) {
+     const { done, value } = await readableStreamDefaultReader.read();
+     if (done) {
+      break;
+     } else {
+      console.log(value);
+     }
+    }
+   })();
+  </script>
+ </body>
+</html>

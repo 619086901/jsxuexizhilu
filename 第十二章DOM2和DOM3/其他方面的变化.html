@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/htm14/strict.dtd" [!ELEMENT name (#PCDATA)]>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      document.write(document.doctype.publicId + "<br>");
+      document.write(document.doctype.systemId + "<br>");
+
+      //dom0会把原有的text值覆盖，dom2则绑定的事件都会被执行
+      //（包括text文本绑定2个，输出的值也会2个）
+    </script>
+  </body>
+</html>

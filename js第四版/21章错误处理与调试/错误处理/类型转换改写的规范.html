@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   function concat(str1, str2, str3) {
+    let result = str1 + str2;
+    if (str3) {
+     //如果str3没有被赋值会被赋予undefined，而undefined会被转换为布尔值false
+     //str3=0的话也是false,1是true
+     //if(typeof str3==="string")
+     //=== !==尽量使用这个
+     result += str3;
+    }
+    return result;
+   }
+
+   function reverseSort(values) {
+    if (values instanceof Array) {
+     //安全 非数组值会被忽略
+     //对象用instanceof
+     //原始值用typeof
+    }
+   }
+  </script>
+ </body>
+</html>

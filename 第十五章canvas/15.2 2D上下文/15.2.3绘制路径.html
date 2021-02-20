@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <canvas id="drawing" width="200" height="200"></canvas>
+  <script>
+   var drawing = document.getElementById("drawing");
+
+   if (drawing.getContext) {
+    //能力检测游览器支持<canvas>
+    var context = drawing.getContext("2d");
+    context.fillStyle = "#ff0000";
+    context.fillRect(10, 10, 50, 50);
+    //fillRect会填充指定的颜色，颜色通过fillStyle属性指定
+
+    context.fillStyle = "rgba(0,0,255,0.5)";
+    context.fillRect(30, 30, 50, 50);
+
+    context.clearRect(40, 40, 10, 10);
+
+    context.strokeStyle = "#ff0000";
+    context.strokeRect(10, 100, 50, 50);
+    //strokeRect会描边指定的颜色，颜色通过strokeStyle属性指定
+
+    context.strokeStyle = "rgba(0,0,255,0.5";
+    context.strokeRect(30, 120, 50, 50);
+
+    context.beginPath(); //开始路径
+
+    context.arc(100, 100, 99, 0, 2 * Math.PI, false); //绘制弧线
+    //(x,y,半径,起始角度，结束角度(要用弧度表示),flase为顺时针方向)
+    //Math.PI=3.14 弧度表示也为3.14也就是180度
+
+    context.stroke(); //描边路径
+   }
+  </script>
+ </body>
+</html>

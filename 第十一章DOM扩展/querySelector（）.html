@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body id="test">
+    <ul class="class1">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+    <ul class="class2">
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+    </ul>
+    <ul id="id1">
+      <li>9</li>
+      <li>10</li>
+      <li>11</li>
+      <li>12</li>
+    </ul>
+    <script>
+      //取得body元素
+      var body = document.querySelector("body");
+      //取得ID为"myDiv"的元素
+      var myDiv = document.querySelector("#myDiv");
+      //取得类为"selected"的第一个元素
+      var selected = document.querySelector(".selected");
+      //取得类为"button"的第一个图像元素
+      //取得类为"class1"中的所有li元素
+      var button = document.querySelector("img.button");
+
+      var oUl = document.querySelector(".class");
+      var oLi1 = document.querySelectorAll(".class1 li");
+      var oLi2 = document.querySelectorAll(".class2 li");
+      document.write(oLi1[3].innerText + "<br>");
+      document.write(oLi2[3].innerText + "<br>");
+      var oLi3 = document.querySelectorAll("#id1 li");
+      document.write(oLi3[3].innerText + "<br>");
+
+      function matchesSelector(element, selector) {
+        if (element.matchesSelector) {
+          return element.matchesSelector(selector);
+        } else if (element.msMatchesSelector) {
+          return element.msMatchesSelector(selector);
+        } else if (element.mozMatchesSelector) {
+          return element.mozMatchesSelector(selector);
+        } else if (element.webkitMatchesSelector) {
+          return element.webkitMatchesSelector(selector);
+        } else {
+          document.write("Not supported");
+        }
+      }
+
+      if (matchesSelector(document.body, "#test")) {
+        document.write("123");
+      }
+
+      document.write(matchesSelector(document.body, "#test"));
+    </script>
+  </body>
+</html>

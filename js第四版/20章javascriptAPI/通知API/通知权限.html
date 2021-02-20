@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   const n = new Notification('123');
+   Notification.requestPermission().then(permission => {
+    console.log('范建峰', permission);
+   });
+   setTimeout(() => n.close(), 1000); //显示通知后1秒后关闭
+   n.onshow; //显示时触发
+   n.onclick; //单击触发
+   n.close; //通知消失或关闭时触发
+   n.onerror; //发生错误阻止通知显示时触发
+  </script>
+ </body>
+</html>

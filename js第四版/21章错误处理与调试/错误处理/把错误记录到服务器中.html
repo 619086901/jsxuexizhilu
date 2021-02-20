@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   function logError(sev, msg) {
+    let img = new Image();
+    let encodedSev = encodeURIComponent(sev),
+     encodedMsg = encodeURIComponent(msg);
+    img.src = `log.php?sev=${encodedSev}&msg=${encodedMsg}`;
+   }
+   for (let mod of mods) {
+    try {
+     mod.init();
+     //使用try/catch
+     //不使用的话只要有一个init()发放出错，那么整个迭代就不会被初始化了
+    } catch (ex) {
+     //出错后可以记录出错的信息，信息中最好包含下上下文信息(也就是try中的内容写点进去)
+     logError('nonfatal', `init=${ex.message}`);
+    }
+   }
+  </script>
+ </body>
+</html>

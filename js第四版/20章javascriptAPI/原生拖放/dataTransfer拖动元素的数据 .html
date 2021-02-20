@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <div draggable="true">11</div>
+  <!--表示元素是否可以拖动-->
+  <script>
+   //在拖动文本的时候调用setData()存储
+   //当数据被放置在目标上使用getData()获取setData()的数据
+   //前提：只能在放置事件中获取，用后dataRransfer会被销毁，数据也会丢失
+   event.dataTransfer.setData('text', 'some text');
+   let text = event.dataTransfer.getData('text');
+
+   event.dataTransfer.setData('URL', 'http://www.baidu.com');
+   let text = event.dataTransfer.getData('URL');
+  </script>
+ </body>
+</html>

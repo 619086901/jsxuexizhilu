@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          //readyState变化都会触发readystatechange事件
+          if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+            console.log(xhr.responseText);
+          } else {
+            console.log(
+              'status:响应的HTTP状态:' +
+                xhr.status +
+                '; 0：未初始化 尚未调用open();' +
+                ' 1:已打开 尚未调用send();' +
+                ' 2:未收到响应;' +
+                ' 3：收到部分响应;' +
+                ' 4:收到所有响应;'
+            );
+          }
+        }
+      };
+
+      xhr.open('get', '1.php', true); //表示请求是否异步的布尔值
+      xhr.setRequestHeader('MyHeader', 'MyValue'); //发送请求头部信息
+      xhr.send(); //调用后请求发送到服务器,null不需要发送请求体
+      //由于内存问题，不推荐使用
+      let myHeader = xhr.getResponseHeader('MyHeader'); //获取响应头部
+      let allHeaders = xhr.getAllResponseHeaders(); //获取所有响应头部
+      console.log(myHeader);
+      console.log(allHeaders);
+    </script>
+  </body>
+</html>

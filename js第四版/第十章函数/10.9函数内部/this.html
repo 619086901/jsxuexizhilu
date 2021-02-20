@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <script>
+         window.color = 'red';
+         let o = {
+            color: 'blue',
+         };
+
+         function sayColor() {
+            console.log(this.color);
+         }
+
+         sayColor(); //red
+         o.sayColor = sayColor;
+         o.sayColor(); //blue
+
+         //箭头函数中this的区别
+
+         function King() {
+            this.royaltyName = 'Henry';
+            //this应用King的实例
+            setTimeout(() => console.log(this.royaltyName), 1000);
+         }
+
+         function Queen() {
+            this.royaltyName = 'Elizabeth';
+            //this引用window对象
+            setTimeout(function () {
+               console.log(this.royaltyName);
+            }, 1000);
+         }
+
+         new King();
+         new Queen();
+      </script>
+   </body>
+</html>

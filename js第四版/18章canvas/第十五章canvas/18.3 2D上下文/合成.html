@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <canvas width="200" height="200" id="drawing"></canvas>
+
+  <script>
+   let drawing = document.getElementById('drawing');
+   if (drawing.getContext) {
+    var context = drawing.getContext('2d');
+    context.fillStyle = '#ff0000';
+    context.fillRect(10, 10, 50, 50);
+
+    context.globalAlpha = 0.5; //0~1绘制内容的透明度
+
+    context.fillStyle = 'rgba(0,0,255,1)';
+    context.fillRect(30, 30, 50, 50);
+
+    context.globalAlpha = 1; //重置
+
+    context.fillStyle = '#ff0000';
+    context.fillRect(80, 80, 50, 50);
+
+    context.globalCompositeOperation = 'destination-over';
+    //globalCompositeOperation表示新绘制的图形如何与上下文融合
+
+    context.fillStyle = 'rgba(0,0,255,1)';
+    context.fillRect(100, 100, 50, 50);
+   }
+  </script>
+ </body>
+</html>

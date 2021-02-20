@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style></style>
+  <body>
+    <div class="bd user disabled" id="div1">1</div>
+    <script>
+      var str = "123 abc 111\ndemo";
+      document.write(str.split(/\s+/) + "<br>");
+      var oDiv = document.querySelector("#div1");
+      document.write(oDiv.innerText + "<br>");
+      document.write(oDiv.className + "<br>");
+      oDiv.classList.remove("user");
+      document.write(oDiv.className + "<br>");
+      oDiv.classList.add("current");
+      document.write(oDiv.className + "<br>");
+      oDiv.classList.toggle("user"); //如果列表中存在则删除，没有则添加
+      document.write(oDiv.className + "<br>");
+      if (
+        oDiv.classList.contains("bd") &&
+        !oDiv.classList.contains("disabled")
+      ) {
+        //执行操作
+        document.write("确定有db");
+      } else {
+      }
+
+      for (var i = 0, len = oDiv.classList.length; i < len; i++) {
+        document.write(oDiv.classList[i] + "<br>");
+      }
+    </script>
+  </body>
+</html>

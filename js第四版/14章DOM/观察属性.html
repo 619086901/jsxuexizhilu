@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //观察属性
+      let observer2 = new MutationObserver(mutationRecords => {
+        console.log(mutationRecords);
+      });
+      observer2.observe(document.body, { attributeFilter: ['foo'] });
+      document.body.setAttribute('foo', 'bar');
+      document.body.setAttribute('baz', 'qux');
+      //只有foo属性的变化被记录了
+
+      let observer3 = new MutationObserver(mutationRecords =>
+        console.log(mutationRecords.map(x => x.oldValue))
+      );
+      observer3.observe(document.body, { attributeOldValue: true });
+      document.body.setAttribute('foo3', 'bar');
+      document.body.setAttribute('foo3', 'bar');
+      document.body.setAttribute('foo3', 'qux');
+      //每次变化保留了上一次的值
+    </script>
+  </body>
+</html>

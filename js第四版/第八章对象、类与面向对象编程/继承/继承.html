@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   function inheritprototype(subType, superType) {
+    var prototype = Object(superType.prototype); //创建对象
+    prototype.constructor = subType; //增强对象
+    subType.prototype = prototype; //赋值对象
+   }
+
+   function SuperType(name) {
+    this.name = name;
+    this.colors = ["red", "blue", "green"];
+   }
+
+   SuperType.prototype.sayName = function () {
+    alert(this.name);
+   };
+
+   function SubType(name, age) {
+    SuperType.call(this, name); //调用SuperType()
+    this.age = age;
+   }
+   inheritprototype(SubType, SuperType); //(子类构造函数，父类构造函数)
+
+   SubType.prototype.sayAge = function () {
+    alert(this.age);
+   };
+
+   var instance = new SubType("Nicholas", 29); //name=Nicholas //age=29
+
+   alert(instance.name + "    " + instance.age + "   " + instance.colors);
+  </script>
+ </body>
+</html>

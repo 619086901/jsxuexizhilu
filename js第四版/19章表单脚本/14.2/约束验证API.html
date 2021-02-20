@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>约束验证API</title>
+ </head>
+ <body>
+  <form action="">
+   <input type="text" id="text" required />required不能空着
+   <input type="number" name="" id="number" min="0" max="100" value="5" />
+   <input type="text" pattern="^\d+$" />
+   <input type="submit" value="提交" name="submit" />
+   <input type="email" id="mail" />
+  </form>
+  <script>
+   var number = document.getElementById("number");
+   var text = document.getElementById("text");
+   var input = document.getElementById("mail");
+
+   number.stepUp(10);
+   number.stepDown(3);
+   var submit = document.forms[0].elements["submit"];
+
+   submit.onclick = function () {
+    if (document.forms[0].checkValidity()) {
+     console.log("表单有效");
+     //表单有效，继续
+    } else {
+     console.log("表单无效");
+    }
+    if (input.validity && !input.validity.valid) {
+     if (input.validity.valueMissing) {
+      console.log("required中没有值");
+     } else if (input.validity.typeMismatch) {
+      console.log("mail格式不对");
+     } else {
+      console.log("值不对");
+     }
+    }
+   };
+  </script>
+ </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <script>
+         //promise.prototype.catch()
+         //相当于调用了Promise.prototype.then(null,onRejected)
+         let p = Promise.reject();
+         let onRejected = function (e) {
+            setTimeout(console.log, 0, 'rejected');
+         };
+         p.then(null, onRejected);
+         p.catch(onRejected);
+      </script>
+   </body>
+</html>

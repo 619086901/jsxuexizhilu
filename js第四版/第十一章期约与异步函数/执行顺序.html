@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <script>
+         let promise = new Promise(function (resolve, reject) {
+            console.log('AAA');
+            resolve();
+         });
+         promise.then(() => console.log('BBB'));
+         console.log('CCC');
+
+         // AAA
+         // CCC
+         // BBB
+
+         let p1 = new Promise((resolve, reject) => {
+            resolve('boo');
+         });
+         p1.then(value => {
+            console.log(value);
+         });
+         let p2 = Promise.reject('bar');
+         p2.catch(reason => {
+            console.log(reason);
+         });
+      </script>
+   </body>
+</html>

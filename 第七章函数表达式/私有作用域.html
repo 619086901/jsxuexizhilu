@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   function outputNumbers1(count) {
+    for (var i = 0; i < count; i++) {
+     document.write(i + "<br>");
+    }
+    document.write("<br>" + i);
+   }
+   //上面的变量i使用完不会被销毁，在函数内部随时可以调用它
+
+   document.write("<br>outputNumbers1==" + outputNumbers1(10));
+
+   function outputNumbers2(count) {
+    (function () {
+     for (var i = 0; i < count; i++) {
+      document.write(i + "<br>");
+     }
+    })();
+    document.write(i);
+   }
+   document.write("outputNumbers2" + outputNumbers2(10));
+  </script>
+ </body>
+</html>

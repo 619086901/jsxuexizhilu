@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   class Counter {
+    constructor(limit) {
+     this.limit = limit;
+    }
+
+    [Symbol.iterator]() {
+     let count = 1,
+      limit = this.limit;
+     return {
+      next() {
+       if (count <= limit) {
+        return { done: false, value: count++ };
+       } else {
+        return { done: true, value: undefined };
+       }
+      },
+      return() {
+       console.log("Exiting early");
+       return { done: true };
+      },
+     };
+    }
+   }
+
+   let counter = new Counter(3);
+
+   for (let i of counter) {
+    console.log(i);
+   }
+
+   let counter1 = new Counter(5);
+   for (let i of counter1) {
+    if (i > 2) {
+     break;
+    }
+    console.log(i);
+   }
+
+   let counter2 = new Counter(5);
+
+   try {
+    for (let i of counter2) {
+     if (i > 2) {
+      throw "err";
+     }
+     console.log(i);
+    }
+   } catch (e) {}
+
+   let counter3 = new Counter(5);
+
+   let [a, b] = counter3;
+   //Exiting early
+  </script>
+ </body>
+</html>

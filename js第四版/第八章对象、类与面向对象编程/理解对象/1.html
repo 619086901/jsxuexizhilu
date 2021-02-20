@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   let name = "matt";
+
+   let person = {
+    name,
+   };
+   console.log(person.name);
+
+   //动态属性赋值
+   const nameKey = "name";
+   const ageKey = "age";
+   const methodKey = "sayName";
+
+   let person2 = {
+    [nameKey]: "matt",
+    [ageKey]: 27,
+    [methodKey](name) {
+     console.log(`My name is ${name}`); //``可以穿插值
+    },
+   };
+   console.log(person2);
+   person2.sayName("matt");
+
+   let { name: personName, age: personAge, sayName: personsayName } = person2;
+
+   console.log(personName + " " + personAge + " " + personsayName);
+  </script>
+ </body>
+</html>

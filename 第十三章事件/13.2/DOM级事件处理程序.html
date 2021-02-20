@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="123" id="myBtn" />
+    <script>
+      var but1 = document.getElementById("myBtn");
+      var handler = function () {
+        document.write(this.id);
+      };
+
+      but1.addEventListener("click", handler, false); //添加事件处理程序
+
+      but1.removeEventListener("click", handler, false); //移出事件处理程序
+    </script>
+  </body>
+</html>

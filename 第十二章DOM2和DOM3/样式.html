@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    #div li {
+      width: 100px;
+    }
+    #div {
+      width: 100px;
+      height: 200px;
+      background-color: blue;
+    }
+  </style>
+  <body>
+    <ul id="div" style="border: 1px solid black; background-color: red">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    <script>
+      var supportsDOM2CSS = document.implementation.hasFeature("CSS", "2.0");
+      var supportsDOM2CSS2 = document.implementation.hasFeature("CSS2", "2.0");
+      var supportsDOM2StyleSheets = document.implementation.hasFeature(
+        "StyleSheets",
+        "2.0"
+      );
+
+      document.write(
+        supportsDOM2CSS +
+          "<br>" +
+          supportsDOM2CSS2 +
+          "<br>" +
+          supportsDOM2StyleSheets +
+          "<br>"
+      );
+      var oDiv = document.getElementById("div");
+      var oLi = document.getElementById("div").getElementsByTagName("li");
+      oDiv.style.width = "400px";
+      oDiv.style.height = "100px";
+
+      for (var i = 0; i < 3; i++) {
+        oLi[i].style.cssFloat = "left"; //IE8不支持，但是支持styleFloat
+      }
+
+      for (var j = 0, len = oDiv.style.length; j < len; j++) {
+        w = oDiv.style[j];
+        document.write(oDiv.style[j] + ":");
+        //getPropertyValue(属性名)取得属性的值
+        document.write(oDiv.style.getPropertyValue(w) + "<br><br>");
+      }
+      var com = document.defaultView.getComputedStyle(oDiv, null);
+      document.write(com.backgroundColor + "<br>");
+      document.write(com.width + "<br>");
+      document.write(com.height + "<br>");
+      document.write(com.border + "<br>");
+
+      //removeProperty()删除样式属性
+      oDiv.style.removeProperty("border");
+    </script>
+  </body>
+</html>

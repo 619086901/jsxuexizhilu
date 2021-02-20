@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <div class="mediaplayer">
+   <div class="video">
+    <video src="1.mp4" id="player" poster="2.png" width="300" height="300" controls></video>
+   </div>
+
+   <div class="controls">
+    <input type="button" value=">" id="video-btn" />
+    <span id="curtime">0</span>
+    /
+    <span id="duration">0</span>
+   </div>
+  </div>
+  <script>
+   let player = document.getElementById('player'),
+    btn = document.getElementById('video-btn'),
+    curtime = document.getElementById('curtime'),
+    duration = document.getElementById('duration');
+
+   duration.innerHTML = player.duration; //duration媒体的总秒数
+
+   btn.addEventListener('click', event => {
+    if (player.paused) {
+     //paused暂停
+     player.play(); //play()开始播放
+     btn.value = '>';
+    } else {
+     player.pause(); //暂停
+     btn.value = '||';
+    }
+   });
+
+   setInterval(() => {
+    curtime.innerHTML = player.currentTime;
+   }, 1000);
+  </script>
+ </body>
+</html>

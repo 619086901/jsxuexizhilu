@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul class="class1">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+    <script>
+      var oUl = document.querySelector(".class1"),
+        first = oUl.firstElementChild,
+        last = oUl.lastElementChild;
+      document.write(first.innerText + "<br>");
+      document.write(last.innerText + "<br>");
+      while (first != last) {
+        //处理元素的方法
+        first = first.nextElementSibling;
+        document.write(first + "<br>");
+        document.write(first.innerText + "<br>");
+      }
+    </script>
+  </body>
+</html>

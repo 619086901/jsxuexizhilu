@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <canvas id="drawing" width="400" height="400" style="border: 1px solid red"></canvas>
+  <script>
+   var drawing = document.getElementById('drawing');
+
+   if (drawing.getContext) {
+    //能力检测游览器支持<canvas>
+    var context = drawing.getContext('2d');
+
+    context.beginPath(); //开始路径
+
+    context.arc(200, 100, 99, 0, 2 * Math.PI, false); //绘制弧线
+    //(x,y,半径,起始角度，结束角度(要用弧度表示),flase为顺时针方向)
+    //Math.PI=3.14 弧度表示也为3.14也就是180度
+
+    //moveTo(x,y)绘制光标移动
+    context.moveTo(294, 100);
+    context.arc(200, 100, 94, 0, 2 * Math.PI, false);
+
+    //分针
+    context.moveTo(200, 100);
+    context.lineTo(200, 15);
+    //lineTo(x,y)绘制直线
+
+    //时针
+    context.moveTo(200, 100);
+    context.lineTo(135, 100);
+
+    context.stroke(); //描边路径
+
+    context.font = 'bold 14px Arial'; //字体样式 大小 字体族
+    context.textAlign = 'center'; //对其方式
+    context.textBaseline = 'middle'; //文本的基线
+    context.fillText('12', 200, 20); //(要绘制的字符串,x,y)
+
+    context.textAlign = 'start';
+    context.fillText('12', 200, 40);
+
+    context.textAlign = 'end';
+    context.fillText('12', 200, 60);
+
+    let fontSize = 100;
+    context.font = fontSize + 'px Arial';
+    while (context.measureText('Hello world!').width > 140) {
+     fontSize--;
+     context.font = fontSize + 'px Arial';
+    }
+    context.fillText('Hello world!', 200, 210);
+    context.fillText('font size is ' + fontSize + 'px', 200, 250);
+   }
+  </script>
+ </body>
+</html>

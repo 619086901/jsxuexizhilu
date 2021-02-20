@@ -1,0 +1,12 @@
+[{
+  "name":"范建峰",
+  "age":20,
+  "school":{
+    "name":"haha",
+    "lacation":"浙江师范大学行知学院"
+  }
+},{
+  "name":"fan",
+  "age":19
+}
+]

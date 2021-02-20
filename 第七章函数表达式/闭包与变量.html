@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   function createFunction1() {
+    var result1 = new Array();
+
+    for (var i = 0; i < 10; i++) {
+     result1[i] = function () {
+      return i;
+     };
+    }
+    return result1;
+   }
+   createFunction1();
+   console.log(createFunction1());
+   document.write(createFunction1() + "<br>");
+
+   function createFunction2() {
+    var result2 = new Array();
+
+    for (var i = 0; i < 10; i++) {
+     result2[i] = (function (num) {
+      return function () {
+       return num;
+      };
+     })(i);
+     return result2;
+    }
+   }
+   console.log(createFunction2());
+   document.write(createFunction2());
+  </script>
+ </body>
+</html>

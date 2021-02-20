@@ -1,0 +1,22 @@
+<ul id="oul">
+    <li id="oli">1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  <input type="input" />
+  <br />
+  <input type="button" id="btn1" value="1" />
+  <input type="button" id="btn2" value="2" />
+  <input type="button" id="btn3" value="3" />
+  <input type="button" id="btn4" value="4" />
+  <input type="button" id="btn5" value="5" />
+  <script>
+
+    function inputclick(id, fun) {
+      var oId = document.getElementById(id);
+      oId.onclick = fun;
+    }
+
+    inputclick("btn1", function () {
+      
+    });

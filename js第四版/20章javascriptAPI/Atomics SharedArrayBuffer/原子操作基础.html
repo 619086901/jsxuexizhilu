@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   //创建大小为1的缓冲区
+   let sharedArrayBuffer = new SharedArrayBuffer(1);
+
+   //基于缓冲创建Uint8Array
+   let typedArray = new Uint8Array(sharedArrayBuffer);
+
+   //所有ArrayBuffer全部初始化为0
+   console.log(typedArray);
+
+   const index = 0;
+
+   //对索引0处的值执行原子或0b1111
+   Atomics.or(typedArray, index, 0b1111);
+   console.log(typedArray);
+
+   //对索引0处的值执行原子与0b1100
+   Atomics.and(typedArray, index, 0b1100);
+   console.log(typedArray);
+
+   //对索引0处的值执行原子异或0b1111
+   Atomics.xor(typedArray, index, 0b1111);
+   console.log(typedArray);
+  </script>
+ </body>
+</html>

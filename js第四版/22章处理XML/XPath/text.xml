@@ -1,0 +1,12 @@
+  <?xml version="1.0" ?>
+  <wrox:books xmlns:wrox="http://www.wrox.com/" id="wrox">
+   <wrox:book>
+    <wrox:title>fan</wrox:title>
+    <wrox:author>C</wrox:author>
+   </wrox:book>
+   <wrox:book>
+    <wrox:title>Ajax</wrox:title>
+    <wrox:author>zakas</wrox:author>
+    <wrox:author>joe</wrox:author>
+   </wrox:book>
+  </wrox:books>

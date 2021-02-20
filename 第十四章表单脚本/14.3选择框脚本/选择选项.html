@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+
+ <body>
+  <form action="">
+   <select name="location">
+    multiple多选
+    <option value="1">111</option>
+    <option value="2">222</option>
+    <option value="">333</option>
+    <option>4</option>
+   </select>
+   value不设置那么value=text
+   <select name="selLocation" id="" multiple>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+   </select>
+  </form>
+ </body>
+ <script>
+  var selectbox = document.forms[0].elements["location"];
+  var selectbox2 = document.forms[0].elements["selLocation"];
+  selectbox.options[2].selected = true; //选中项
+
+  selectbox.onchange = function () {
+   console.log(
+    "text=" +
+     selectbox.options[selectbox.selectedIndex].text +
+     " index=" +
+     selectbox.selectedIndex +
+     " value=" +
+     selectbox.options[selectbox.selectedIndex].value
+   );
+  };
+
+  function getSelectedOptions(selectbox) {
+   var result = new Array();
+   var option = null;
+   for (var i = 0, len = selectbox.options.length; i < len; i++) {
+    option = selectbox.options[i];
+    if (option.selected) {
+     result.push(option);
+    }
+   }
+   return result;
+  }
+
+  selectbox2.onchange = function () {
+   var selectedOptions = getSelectedOptions(selectbox2);
+   var message = "";
+   for (var i = 0, len = selectedOptions.length; i < len; i++) {
+    message +=
+     "text=" +
+     selectedOptions[i].text +
+     " index=" +
+     selectedOptions[i].index +
+     " value=" +
+     selectedOptions[i].value +
+     "      ";
+   }
+   console.log(message);
+  };
+ </script>
+</html>

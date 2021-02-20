@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        var hasDOM1=!!(document.getElementById && document.createElement && document.getElementsByTagName);
+        //检测游览器是否具备DOM1级所规定的能力
+
+        var hasNSPlugins=!!(navigator.plugins && navigator.plugins.length);
+
+        function isHostMethod(object,property){
+            var t=typeof object[property];
+            return t=='function' ||(!!(t=='object' && object[property])) || t=='unknown';
+        }
+        
+        document.write(hasDOM1+"<br>");
+        document.write(hasNSPlugins);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let enabled = true;
+      function expensiveOperation() {
+        console.log(1);
+      }
+      window.addEventListener('scroll', () => {
+        if (enabled) {
+          enabled = false;
+          window.requestAnimationFrame(expensiveOperation);
+          //requestAnimationFrame()回调的执行在重绘的时候执行
+          window.setTimeout(() => (enabled = true), 50);
+        }
+      });
+    </script>
+  </body>
+</html>

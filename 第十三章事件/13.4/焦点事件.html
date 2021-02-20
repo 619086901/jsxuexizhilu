@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="跨游览器的事件对象.js"></script>
+ </head>
+ <body>
+  <input type="text" name="" id="but1" onblur="bb(this)" onfocus="ff(this)" />
+  <script>
+   var isSupported = document.implementation.hasFeature("FocusEvent", "3.0");
+   var input1 = document.getElementById("input1");
+
+   EventUtil.addHandler(window, "load", function (event) {
+    var event = EventUtil.getEvent();
+    var input1 = document.createElement("input");
+    input1.type = "text";
+    input1.value = "haha";
+    EventUtil.addHandler(input1, "blur", function () {
+     input1.value = "我失去了焦点";
+    });
+
+    EventUtil.addHandler(input1, "focus", function () {
+     input1.value = "我获得了焦点";
+    });
+    document.body.appendChild(input1);
+   });
+
+   var but1 = document.getElementById("but1");
+   function bb(x) {
+    x.value = "我失去了焦点";
+   }
+
+   function ff(x) {
+    x.value = "我获得了焦点";
+   }
+
+   but1.focus();
+  </script>
+ </body>
+</html>

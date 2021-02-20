@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="JSON对象.js"></script>
+  </head>
+  <body>
+    <script>
+      let jsonText = JSON.stringify(book); //js序列化为json
+
+      let bookCopy = JSON.parse(jsonText); //json序列化为js
+
+      console.log(jsonText);
+
+      console.log(bookCopy);
+
+      //stringify(book,[title,edition])
+      let jsonText2 = JSON.stringify(book, (key, value) => {
+        switch (key) {
+          case 'authors':
+            return value.join(','); //转换为字符串
+          case 'year':
+            return 5000;
+          case 'edition':
+            return undefined;
+          default:
+            return value;
+        }
+      });
+      console.log(jsonText2);
+
+      //stringify(book,[数组属性名和属性值],缩进和空格)
+
+      let jsonText3 = JSON.stringify(book, null, 4); //最大10
+      console.log(jsonText3);
+
+      let jsonText4 = JSON.stringify(book);
+      let bookCopy2 = JSON.parse(
+        jsonText4,
+        (key, value) => (key == 'releaseDate' ? new Date(value) : value) //找到releaseDate创建一个Date对象
+      );
+      console.log(bookCopy2.releaseDate.getFullYear()); //然后就可以使用其自己的getFullYear()方法
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <canvas width="100" height="100" id="drawing"></canvas>
+  <script>
+   let drawing = document.querySelector('#drawing');
+   if (drawing.getContext) {
+    let context = drawing.getContext('2d');
+
+    context.shadowOffsetX = 5; //偏移量
+    context.shadowOffsetY = 5;
+    context.shadowBlur = 4; //模糊量
+    context.shadowColor = 'rgba(0,0,0,0.5)'; //阴影颜色
+
+    context.fillStyle = '#ff0000';
+    context.fillRect(10, 10, 50, 50);
+
+    context.fillStyle = 'rgba(0,0,255,1)';
+    context.fillRect(30, 30, 50, 50);
+   }
+  </script>
+ </body>
+</html>

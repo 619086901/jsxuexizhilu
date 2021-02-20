@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <script>
+         //sleep()
+         async function sleep(delay) {
+            return new Promise(resolve => setTimeout(resolve, delay));
+         }
+         async function foo() {
+            const t = Date.now();
+            await sleep(1500);
+            console.log(Date.now() - t);
+         }
+         foo();
+
+         //串行执行期约
+         async function addTwo(x) {
+            return x + 2;
+         }
+         async function addThree(x) {
+            return x + 3;
+         }
+         async function addFive(x) {
+            return x + 5;
+         }
+         async function addTen(x) {
+            for (const fn of [addTwo, addThree, addFive]) {
+               x = await fn(x);
+            }
+            return x;
+         }
+         addTen(9).then(console.log);
+      </script>
+   </body>
+</html>

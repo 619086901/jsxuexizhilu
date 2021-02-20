@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   Notification.requestPermission().then(permission => {
+    console.log('范建峰', permission);
+   });
+   new Notification('text', {
+    body: 'text',
+    image: 'C:\Users\61908\Desktop\js\js第四版\20章javascriptAPI\20.5媒体元素\2.png',
+   });
+  </script>
+ </body>
+</html>

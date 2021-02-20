@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   //类构造函数调用父类构造函数super()
+   class Vehicle {
+    constructor() {
+     this.hasEngine = true;
+    }
+   }
+   class Bus extends Vehicle {
+    constructor() {
+     super(); //相当于super.constructor() 不要在调用super()之前引用this,否则会抛出ReferenceError
+     console.log(this instanceof Vehicle);
+     console.log(this);
+    }
+   }
+   new Bus();
+
+   //静态方法中调用继承类上定义的静态方法
+   class Vehicle2 {
+    static identify() {
+     console.log("vehicle");
+    }
+   }
+
+   class Bus2 extends Vehicle2 {
+    static identify() {
+     super.identify();
+    }
+   }
+   Bus2.identify(); //vehicle
+
+   //继承内置类型
+   class SuperArray extends Array {}
+
+   let a1 = new SuperArray(1, 2, 3, 4, 5);
+   let a2 = a1.filter((x) => !!(x % 2)); //filter()返回符合的元素
+
+   console.log(a1);
+   console.log(a2);
+
+   //类混入
+   class Vehicle3 {}
+   let FooMixin = (Superclass) =>
+    class extends Superclass {
+     foo() {
+      console.log("foo");
+     }
+    };
+   let BarMixin = (Superclass) =>
+    class extends Superclass {
+     bar() {
+      console.log("bar");
+     }
+    };
+   let BazMixin = (Superclass) =>
+    class extends Superclass {
+     baz() {
+      console.log("baz");
+     }
+    };
+   class Bus3 extends FooMixin(BarMixin(BazMixin(Vehicle3))) {}
+
+   let b = new Bus3();
+   b.foo();
+   b.bar();
+   b.baz();
+  </script>
+ </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ </head>
+ <body>
+  <canvas width="1000" height="1000" id="drawing"></canvas>
+  <script>
+   let drawing = document.querySelector('#drawing');
+
+   if (drawing.getContext) {
+    let context = drawing.getContext('2d');
+    let gradient = createRectLinearGradient(context, 30, 30, 70, 70);
+    function createRectLinearGradient(context, x, y, width, height) {
+     return context.createLinearGradient(x, y, x + width, y + height);
+    }
+    gradient.addColorStop(0, 'white'); //0~1范围内的值表示,0第一种,1最后一种
+    gradient.addColorStop(1, 'black');
+    context.fillStyle = '#ff0000';
+    context.fillRect(10, 10, 50, 50);
+    context.fillStyle = gradient;
+    context.fillRect(30, 30, 70, 70);
+
+    //(120+50)/2=145
+    //径向渐变
+    let gradient2 = context.createRadialGradient(145, 145, 10, 145, 145, 30);
+    gradient2.addColorStop(0, 'white');
+    gradient2.addColorStop(1, 'black');
+
+    context.fillStyle = '#ff0000';
+    context.fillRect(100, 100, 50, 50);
+
+    context.fillStyle = gradient2;
+    context.fillRect(120, 120, 50, 50);
+   }
+  </script>
+ </body>
+</html>

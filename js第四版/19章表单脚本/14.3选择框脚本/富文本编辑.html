@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="C:\Users\61908\Desktop\js\第十三章事件\13.4\跨游览器的事件对象.js"></script>
+ </head>
+ <style>
+  iframe {
+   width: 100px;
+   height: 100px;
+  }
+  div {
+   width: 100px;
+   height: 100px;
+   border: 1px solid red;
+  }
+ </style>
+ <body>
+  <iframe name="richedit"></iframe>
+  <div id="div1" contenteditable>asd</div>
+  <input type="button" value="B" id="B" />
+  <script>
+   var inputB = document.getElementById("B");
+   var div1 = document.getElementById("div1");
+   EventUtil.addHandler(window, "load", function () {
+    frames["richedit"].document.designMode = "on";
+   });
+   inputB.onclick = function () {
+    frames["richedit"].document.execCommand("bold", false, null);
+   };
+  </script>
+ </body>
+</html>

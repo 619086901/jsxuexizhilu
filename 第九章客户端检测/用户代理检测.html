@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        var client=function(){
+            var engine={
+                //呈现引擎
+                ie:0,
+                gecko:0,
+                webkit:0,
+                khtml:0,
+                opera:0,
+
+                ver:null//具体的版本号
+            };
+            
+            var browser={
+                //游览器
+                ie:0,
+                firefox:0,
+                safari:0,
+                konq:0,
+                opera:0,
+                chrome:0,
+                //具体版本号
+                var:null
+            };
+
+            var system={
+                win:false,//windows平台
+                mac:false,//Mac
+                xll:false,//Unix
+
+                //移动设备
+                iphone:false,
+                ipod:false,
+                ipad:false,
+                ios:false,
+                android:false,
+                nokiaN:false,
+                winMobile:false,
+
+                //游戏系统
+                wii:false,
+                ps:false,
+            };
+
+            var ua=navigator.userAgent;
+            document.write(ua+"<br>");
+
+        if(window.opera){
+            engine.ver= browser.ver=window.opera.version();//ver---sion()返回游览器版本的字符串
+            engine.opera=browser.opera=parseFloat(engine.ver);
+            
+        }else if (/AppleWebKit\/(\S+)/.test(ua)){
+            engine.ver=RegExp["$1"];
+            engine.webkit=parseFloat(engine.ver);
+            
+            //确定是Chrome还是Safari
+            if(/Chrome\/(\S+)/.test(ua)){
+                browser.ver=RegExp["$1"];
+                browser.chrome=parseFloat(browser.ver);
+            }else if(/Version\/(\S+)/.test(ua)){
+                browser.ver=RegExp["$1"];
+                browser.safari=parseFloat(browser.ver);
+            }else{
+                //近似地确定版本号
+                var safariVersion=1;
+                if(engine.webkit<100){
+                    safariVersion=1;
+                }else if(engine.webkit<312){
+                    safariVersion=1.2;
+                }else if(engine.webkit<412){
+                    safariVersion=1.3;
+                }else{
+                    safariVersion=2;
+                }
+                browser.safari=browser.ver=safariVersion;
+            }
+        }else if (/KHTML\/(\S+)/.test(ua) || /Konqueror\/([^;]+)/.test(ua)){
+            engine.ver=browser.ver=RegExp["$1"];
+            engine.khtml=browser.konq=parseFloat(engine.ver);
+
+        }else if(/rv:([^\)]+)\) Gecko\/\d{8}/.test(ua)){
+            engine.ver=RegExp["$1"];
+            engine.gecko=parseFloat(engine.ver);
+
+            //确定是不是Firefox
+            if (/Firefox\/(\S+)/.test(ua)){
+                browser.ver=RegExp["$1"];
+                browser.firefox=parseFloat(browser.ver);
+            }
+        }else if (/MSIE ([^;]+)/.test(ua)){
+            engine.ver=browser.ver=RegExp["$1"];
+            engine.ie=browser.ie=parseFloat(engine.ver);
+
+        }
+
+
+        browser.ie=engine.ie;
+        browser.opera=engine.opera;
+
+        //检测平台
+        var p=navigator.platform;
+        system.win=p.indexOf("Win")==0;//indexOf返回出现Win的开始位置
+        system.mac=p.indexOf("Mac")==0;
+        system.xll=(p.indexOf("Xll")==0)||(p.indexOf("Linux")==0);
+        document.write("<br>p="+p+"<br>"+system.win+"<br>");
+
+        //检测windows操作系统
+        if(system.win){
+            if(/Win(?:dows )?([^do]{2})\s?(\d+\.\d+)?/.test(ua)){
+                
+                if(RegExp["$1"]=="NT"){
+                    document.write("RegExp[1]="+RegExp["$1"]+"<br>");
+                    document.write("RegExp[2]="+RegExp["$2"]+"<br>");
+                    switch(RegExp["$2"]){
+                        case "5.0":
+                            system.win="2000";
+                            break;
+                        case "5.1":
+                            system.win="XP";
+                            breakl
+                        case "6.0":
+                            system.win="Vista";
+                            break;
+                        case "6.1":
+                            system.win="7";
+                            break;
+                        case "6.2":
+                            system.win="8";
+                            break;
+                        case "10.0":
+                            system.win="10";
+                            break;
+                        default:
+                            system.win="NT";
+                            break;
+                    }
+                }else if(RegExp["$1"]=="9x"){
+                    system.win="ME";
+                }else{
+                    system.win=RegExp["$1"];
+                    
+                }
+            }
+        }
+        //移动设备
+        system.iphone=ua.indexOf("iPhone")>-1;
+        system.ipod=ua.indexOf("iPod")>-1;
+        system.ipad=ua.indexOf("iPad")>-1;
+        system.nokiaN=ua.indexOf("NokiaN")>-1;
+
+        //windows mobile
+        if(system.win=="CE"){
+
+            system.winMobile=system.win;
+        }else if(system.win=="Ph"){
+            if(/Windows Phone OS+ (\d+.\d+)/.test(ua)){
+                system.win="Phone";
+                system.winMobile=parseFloat(RegExp["$1"]);
+            }
+        }
+
+        //检测iOS版本
+        if(system.mac && ua.indexOf("Mobile")>-1 || system.iphone){
+            if(/CPU (?:iPhone )?OS (\d+_\d+)/.test(ua)){
+                system.ios=parseFloat(RegExp.$1.replace("_","."));
+            }else{
+                system.ios=2;
+            }
+        }
+
+        //检测Android版本
+        if(/Android (\d+\.\d+)/.test(ua)){
+            system.android=parseFloat(RegExp.$1);
+        }
+
+        //游戏系统
+        system.wii=ua.indexOf("Wii")>-1;
+        system.ps=/playstation/i.test(ua);
+
+        document.write("engine ver="+engine.ver+" opera="+engine.opera+"<br>");
+        document.write("webkit="+engine.webkit+"<br>");
+        document.write("khtml="+engine.khtml+"<br>");
+        document.write("gecko="+engine.gecko+"<br>");
+        document.write("ie="+engine.ie+"<br>");
+        
+        document.write("browser ver="+browser.ver+"<br>");
+        document.write("chrome="+browser.chrome+"<br>");
+        document.write("konq="+browser.konq+"<br>");
+        document.write("safari="+browser.safari+"<br>");
+        document.write("firefox="+browser.firefox+"<br>")
+
+            return{
+                engine:engine,
+                browser:browser,
+                system:system,
+            };
+        }();
+        
+        document.write("Windows:"+client.system.win+"<br>Mac:"+client.system.mac+"<br>Unix:"+client.system.xll);
+        document.write("<br>system.win="+client.system.win);
+        document.write("<br>system.iphone="+client.system.iphone);
+        document.write("<br>system.ipad="+client.system.ipad);
+        document.write("<br>system.ipod="+client.system.ipod);
+        document.write("<br>system.nokiaN="+client.system.nokiaN);
+
+        document.write("<br>system.ios="+client.system.ios);
+        document.write("<br>system.android="+client.system.android);
+
+        if(client.engine.webkit){
+            if(client.browser.chrome){
+                document.write("<br>我是Chrome<br>");
+            }else if(client.browser.safari){
+                document.write("<br>我是Safari<br>");
+            }
+        }else if(client.engine.gecko){
+            if(client.browser.firefox){
+                document.write("<br>我是Firefox<br>");
+            }else{
+                document.write("<br>我是Gecko<br>");
+            }
+        }
+
+
+        if(client.engine.ie){ //如果是IE，client.ie的值应该大于0
+
+        }else if(client.engine.gecko>1.5){
+            if(client.engine.ver=="1.8.1"){
+                //针对这个版本执行某些操作
+            }
+        }
+
+        if(client.engine.webkit){
+            if(client.browser.chrome){
+                //执行针对Chrome的代码
+            }else if(client.browser.safari){
+                //执行针对Safari的代码
+            }
+        }else if(client.browser.gecko){
+            if(client.browser.firefox){
+                //执行针对Firefox的代码
+            }else{
+                //执行针对其他Gecko游览器的代码
+            }
+
+        }
+
+        if(client.engine.webkit){
+            if(client.system.ios){
+                document.write("<br>我是ios<br>");
+            }else if(client.system.android){
+                document.write("我是Android<br>");
+            }else if(client.system.nokiaN){
+                document.write("我是诺基亚<br>");
+            }
+        }
+    </script>
+</body>
+</html>
