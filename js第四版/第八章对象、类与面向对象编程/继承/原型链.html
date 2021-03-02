@@ -1,39 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
- </head>
- <body>
-  <script>
-   function SuperType() {
-    this.property = true;
-   }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function SuperType() {
+        this.property = true;
+      }
 
-   SuperType.prototype.getSuperValue = function () {
-    return this.property;
-   };
+      SuperType.prototype.getSuperValue = function () {
+        return this.property;
+      };
 
-   function SubType() {
-    this.subproperty = false;
-   }
+      function SubType() {
+        this.subproperty = false;
+      }
 
-   //继承
-   SubType.prototype = new SuperType();
+      //继承
+      SubType.prototype = new SuperType();
 
-   //新方法
-   SubType.prototype.getSubValue = function () {
-    return this.subproperty;
-   };
+      //新方法
+      SubType.prototype.getSubValue = function () {
+        return this.subproperty;
+      };
 
-   //覆盖已有的方法
-   SubType.prototype.getSubValue = function () {
-    return false;
-   };
+      //覆盖已有的方法
+      //在控制台的上一层覆盖了下一层的方法
+      //自己原型下面的方法还没调用到，就被前面写的同样名字方法调用了，调用后就停下来了
+      SubType.prototype.getSuperValue = function () {
+        return false;
+      };
 
-   let instance = new SubType();
-   console.log(instance.getSubValue());
-  </script>
- </body>
+      let instance = new SubType();
+      console.log(instance.getSubValue());
+      console.log(instance.getSuperValue()); //false
+      console.log(SubType.prototype);
+      console.log(SuperType.prototype);
+      console.log(instance);
+    </script>
+  </body>
 </html>
