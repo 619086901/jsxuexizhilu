@@ -47,22 +47,23 @@
         // 读取完成
         reader.onload = function (e) {
           let html = ''
-          let data = new Uint8Array(reader.result)
-          let workbook = XLSX.read(data, { type: 'array' })
+
           switch (type) {
             case 'image':
               html = `<img src="${reader.result}">`
               break
             case 'text':
+              let data = new Uint8Array(reader.result)
+              let workbook = XLSX.read(data, { type: 'array' })
               console.log(workbook)
+              //将数据转换为json格式
               let stream = XLSX.utils.sheet_to_json(workbook.Sheets.Sheet1, {
-                raw: true
+                raw: true //保存原石字符串 false 格式化字符串
               })
               console.log(stream)
               but1.onclick = () => {
                 XLSX.writeFile(workbook, 'out.xlsb') //保存文件
               }
-
               break
           }
           output.innerHTML = html
