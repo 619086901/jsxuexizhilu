@@ -21,33 +21,26 @@
       <input type="button" value="123" name="button" />
     </form>
     <script>
-      var form = document.forms[0];
-      var submit = document.getElementById('submit');
-      var button = form.elements['button'];
+      let form = document.forms[0];
+      let submit = document.getElementById('submit');
+      let button = form.elements['button'];
       button.onclick = function () {
         console.log(serialize(form));
+        let i = '%3D';
+        console.log(decodeURIComponent(i));
       };
+
       function serialize(form) {
-        var parts = [],
-          field = null,
-          i,
-          len,
-          j,
-          optLen,
-          option,
-          optValue;
-        for (i = 0, len = form.elements.length; i < len; i++) {
-          field = form.elements[i];
+        let parts = [];
+        let optValue;
+        for (let field of form.elements) {
           switch (field.type) {
             case 'select-one': //单选
             case 'select-multiple': //多选
               if (field.name.length) {
-                for (j = 0, optLen = field.options.length; j < optLen; j++) {
-                  option = field.options[j];
+                for (let option of field.options) {
                   if (option.selected) {
-                    optValue = '';
                     if (option.hasAttribute) {
-                      //能力检测
                       optValue = option.hasAttribute('value')
                         ? option.value
                         : option.text;
@@ -65,28 +58,27 @@
                 }
               }
               break;
-            case undefined:
-            case 'file':
-            case 'submit':
-            case 'reset':
-            case 'button':
+            case undefined: //字段集
+            case 'file': //文件输入
+            case 'submit': //提交按钮
+            case 'reset': //重置按钮
+            case 'button': //自定义按钮
               break;
-            case 'radio':
-            case 'checkbox':
+            case 'radio': //单选按钮
+            case 'checkbox': //复选框
               if (!field.checked) {
                 break;
               }
             default:
+              //不包含没有名字的表单字段
               if (field.name.length) {
                 parts.push(
-                  encodeURIComponent(field.name) +
-                    '=' +
-                    encodeURIComponent(field.value)
+                  '${encodeURIComponent(field.name)}=' +
+                    '${encodeURIComponent(field.value)}'
                 );
               }
           }
         }
-
         return parts.join('&');
       }
     </script>

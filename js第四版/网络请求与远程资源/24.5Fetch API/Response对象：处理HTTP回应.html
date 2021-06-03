@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img class="img" src="" id="img" width="200px" height="200px" />
+    <script>
+      async function fetchText() {
+        let response = await fetch('readme.txt');
+        try {
+          console.log(response);
+          console.log(response.type);
+          console.log(`response.ok: ${response.ok}`);
+          console.log(`response.status: ${response.status}`);
+          console.log(`response.statusText: ${response.statusText}`);
+          console.log(response.headers);
+          // for (let [key, value] of response.headers.entries()) {
+          //   console.log(`${key} : ${value}`);
+          // }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      //判断请求是否成功
+      async function fetchText2() {
+        let response = await fetch('readme.txt');
+        if (response.status >= 200 && response.status < 300) {
+          const body = await response.text();
+          console.log(body);
+          return body;
+        } else {
+          throw new Error(response.statusText);
+        }
+      }
+
+      //读取内容的方法response.json()
+      async function getJSON() {
+        let url = 'response.json';
+        try {
+          let response = await fetch(url);
+          const body = await response.json();
+          console.log(body);
+          return body;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      //读取内容的方法response.blob()
+      async function getBlob() {
+        let url = 'response.jpg';
+        try {
+          let response = await fetch(url);
+          const myBlob = await response.blob();
+          const objectURL = URL.createObjectURL(myBlob);
+          let myImage = document.getElementById('img');
+          myImage.src = objectURL;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      fetchText();
+      fetchText2();
+      getJSON();
+      window.onload = function () {
+        getBlob();
+      };
+    </script>
+  </body>
+</html>

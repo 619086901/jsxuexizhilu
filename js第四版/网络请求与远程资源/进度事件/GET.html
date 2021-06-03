@@ -7,24 +7,24 @@
     <title>Document</title>
     <script>
       function loadXMLDoc() {
-        let xhr = new XMLHttpRequest();
-        let oUser = document.getElementById('user');
-        let oAge = document.getElementById('age');
+        let xhr = new XMLHttpRequest()
+        let oUser = document.getElementById('user')
+        let oAge = document.getElementById('age')
         function addURLParam(url, name, value) {
-          url += url.indexOf('?') == -1 ? '?' : '&'; //检查是否有问号，没有就加上，否则就加&号
-          url += encodeURIComponent(name) + '=' + encodeURIComponent(value);
+          url += url.indexOf('?') == -1 ? '?' : '&' //检查是否有问号，没有就加上，否则就加&号
+          url += encodeURIComponent(name) + '=' + encodeURIComponent(value)
           //然后用encodeURLComponent进行编码并加上末尾
-          return url;
+          return url
           //最后返回url
         }
         xhr.onreadystatechange = function () {
           if (xhr.readyState == 4) {
             //readyState变化都会触发readystatechange事件
             if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-              var obj = JSON.parse(xhr.responseText);
-              console.log(obj);
-              oUser.innerText = obj.name;
-              oAge.innerText = obj.age;
+              var obj = JSON.parse(xhr.responseText)
+              console.log(obj)
+              oUser.innerText = obj.name
+              oAge.innerText = obj.age
             } else {
               console.log(
                 'status:响应的HTTP状态:' +
@@ -34,15 +34,15 @@
                   ' 2:未收到响应;' +
                   ' 3：收到部分响应;' +
                   ' 4:收到所有响应;'
-              );
+              )
             }
           }
-        };
-        let url = 'get.json';
-        url = addURLParam(url, 'fname', 'fan');
+        }
+        let url = 'get.json'
+        url = addURLParam(url, 'fname', 'fan')
 
-        xhr.open('get', url, true);
-        xhr.send();
+        xhr.open('get', url, true)
+        xhr.send()
       }
     </script>
   </head>

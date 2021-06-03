@@ -8,7 +8,19 @@
   </head>
   <body>
     <script>
-      fetch(bar.txt);
+      fetch('bar.txt').then((response) => {
+        console.log(response);
+      });
+
+      fetch('bar.txt').then((response) => {
+        response.text().then((data) => {
+          console.log(data);
+        });
+      });
+
+      fetch('bar.txt')
+        .then((response) => response.text())
+        .then((data) => console.log(data));
     </script>
   </body>
 </html>

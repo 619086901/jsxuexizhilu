@@ -10,27 +10,27 @@
     <script>
       //函数声明的特点会函数声明提升到顶端
       //下面千万不要做
-      let condition = true;
+      let condition = true
       if (condition) {
         function sayHi() {
-          console.log('hi');
+          console.log('hi')
         }
       } else {
         function sayHi() {
-          console.log('yo');
+          console.log('yo')
         }
       }
 
       //改成函数表达式就可以了
-      let sayHi2;
+      let sayHi2
       if (condition) {
         sayHi2 = function () {
-          console.log('hi');
-        };
+          console.log('hi')
+        }
       } else {
         sayHi2 = function () {
-          console.log('yo');
-        };
+          console.log('yo')
+        }
       }
     </script>
   </body>

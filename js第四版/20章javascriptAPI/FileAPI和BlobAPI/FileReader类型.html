@@ -1,11 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
- </head>
- <body>
-  <script></script>
- </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./xlsx.full.min.js"></script>
+  </head>
+
+  <body>
+    <input type="file" name="" id="files-list" />
+    <div id="output"></div>
+    <div id="progress"></div>
+    <button id="but1">导出</button>
+    <script>
+      let filesList = document.getElementById('files-list')
+      filesList.addEventListener('change', (event) => {
+        let info = ''
+        output = document.getElementById('output')
+        progress = document.getElementById('progress')
+        but1 = document.getElementById('but1')
+        files = event.target.files
+        type = 'default'
+        reader = new FileReader()
+
+        if (/image/.test(files[0].type)) {
+          reader.readAsDataURL(files[0])
+          type = 'image'
+        } else {
+          //表格
+          console.log(files)
+          reader.readAsArrayBuffer(files[0])
+          type = 'text'
+        }
+
+        //发生错误
+        reader.onerror = function () {
+          output.innerHTML = '出错' + reader.error.code
+        }
+
+        //还有更多数据事件
+        reader.onprogress = function (event) {
+          if (event.lengthComputable) {
+            progress.innerHTML = `${event.loaded}/${event.total}`
+          }
+        }
+        // 读取完成
+        reader.onload = function (e) {
+          let html = ''
+          let data = new Uint8Array(reader.result)
+          let workbook = XLSX.read(data, { type: 'array' })
+          switch (type) {
+            case 'image':
+              html = `<img src="${reader.result}">`
+              break
+            case 'text':
+              console.log(workbook)
+              let stream = XLSX.utils.sheet_to_json(workbook.Sheets.Sheet1, {
+                raw: true
+              })
+              console.log(stream)
+              but1.onclick = () => {
+                XLSX.writeFile(workbook, 'out.xlsb') //保存文件
+              }
+
+              break
+          }
+          output.innerHTML = html
+        }
+      })
+    </script>
+  </body>
 </html>
