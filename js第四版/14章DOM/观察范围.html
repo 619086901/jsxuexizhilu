@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //1.观察属性
+      let observer2 = new MutationObserver((mutationRecords) => {
+        console.log(mutationRecords)
+      })
+      observer2.observe(document.body, { attributeFilter: ['bh1'] })
+
+      document.body.setAttribute('bh1', '1')
+      document.body.setAttribute('bh2', '2')
+      document.body.setAttribute('bh3', '3')
+      //只有foo属性的变化被记录了
+
+      //记录变化
+      let observer3 = new MutationObserver((data) =>
+        console.log(
+          data.map((x) => {
+            return x.oldValue
+          })
+        )
+      )
+      //attributeOldValue设置为true,变化记录中保存原来的值
+      observer3.observe(document.body, { attributeOldValue: true })
+      //添加属性
+      document.body.setAttribute('foo3', '1')
+      //修改属性
+      document.body.setAttribute('foo3', '2')
+      //修改属性
+      document.body.setAttribute('foo3', '3')
+      //每次变化保留了上一次的值
+
+      // 2.观察字符数据
+      let observer4 = new MutationObserver((data) => {
+        console.log(
+          data.map((x) => {
+            return x.oldValue
+          })
+        )
+      })
+
+      //创建
+      document.body.firstChild.textContent = 'fjf'
+
+      //观察其DOM节点 和观察的规则（一个对象）
+      //
+      observer4.observe(document.body.firstChild, {
+        characterDataOldValue: true
+      })
+
+      //赋值
+      document.body.firstChild.textContent = 'fjf'
+
+      document.body.firstChild.textContent = 'fjfdraw'
+
+      document.body.firstChild.textContent = 'fjfdrawdraw'
+
+      //3.观察子节点
+      //清空
+      document.body.innerHTML = ''
+      let observer5 = new MutationObserver((MutationRecords) => {
+        console.log('------------')
+        console.log(MutationRecords)
+      })
+
+      document.body.appendChild(document.createElement('div'))
+      document.body.appendChild(document.createElement('span'))
+
+      observer5.observe(document.body, { childList: true })
+
+      document.body.insertBefore(
+        document.body.lastChild,
+        document.body.firstChild
+      )
+      //观察(2)[MutationRecord, MutationRecord]
+
+      //4.观察子树
+      document.body.innerHTML = ''
+
+      let observe6 = new MutationObserver((data) => {
+        console.log('-----------------')
+        console.log('observe6')
+        console.log(data)
+      })
+
+      document.body.appendChild(document.createElement('div'))
+      observe6.observe(document.body, {
+        attributes: true,
+        subtree: true
+      })
+
+      document.body.firstChild.setAttribute('data', '1')
+    </script>
+  </body>
+</html>

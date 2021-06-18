@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let observer = new MutationObserver((data) => {
+        console.log(data)
+      })
+
+      observer.observe(document.body, {
+        attributes: true
+      })
+
+      document.body.className = 'fjf'
+      document.body.className = 'fjf2'
+      document.body.className = 'fjf3'
+      document.body.className = 'fjf4'
+
+      //清空记录队列，取出并返回其中的所有MutationRecord实例
+      console.log(observer.takeRecords())
+      console.log(observer.takeRecords())
+    </script>
+  </body>
+</html>

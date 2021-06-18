@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
- </head>
- <body>
-  <script>
-   //observe()
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let observer = new MutationObserver((mutationRecords) => {
+        console.log(
+          mutationRecords.map((x) => {
+            console.log(x)
+            //target被影响的节点
+            return x.target
+          })
+        )
+      })
 
-   let observer = new MutationObserver(mutationRecords => {
-    console.log(mutationRecords.map(x => x.target));
-   });
-   //target被影响的节点
+      //创建
+      let childA = document.createElement('div'),
+        childB = document.createElement('span')
 
-   observer.observe(document.body, {
-    attributes: true,
-   });
-   //(观察其变化DOM节点,以及MutationObserverInit对象)
+      //添加
+      document.body.appendChild(childA)
+      document.body.appendChild(childB)
 
-   document.body.setAttribute('foo', 'bar');
-   //返回mutationRecords的信息发生了什么变化
+      //观察其变化DOM节点,以及MutationObserverInit对象
+      observer.observe(childA, {
+        attributes: true
+      })
+      observer.observe(childB, {
+        attributes: true
+      })
 
-   let childA = document.createElement('div'),
-    childB = document.createElement('span');
+      //observer.disconnect() //停止执行回调
+      //断开了observe()方法的观察的联系
 
-   document.body.appendChild(childA);
-   document.body.appendChild(childB);
-
-   observer.observe(childA, {
-    attributes: true,
-   });
-   observer.observe(childB, {
-    attributes: true,
-   });
-   //  observer.disconnect()停止执行回调
-   //断开了observe的观察的联系
-   childA.setAttribute('foo', 'bar');
-   childB.setAttribute('foo', 'bar');
-  </script>
- </body>
+      childA.setAttribute('foo', 'bar')
+      childB.setAttribute('foo', 'bar')
+    </script>
+  </body>
 </html>
